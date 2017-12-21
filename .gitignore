@@ -1,0 +1,9 @@
+# https://www.slimframework.com/
+/vendor/
+/logs/*
+!/logs/README.md
+
+# IDEA Settings
+ojt-php.iml
+.idea
+
