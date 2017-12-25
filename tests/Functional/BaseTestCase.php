@@ -2,11 +2,11 @@
 
 namespace Tests\Functional;
 
+use PHPUnit\Framework\TestCase;
 use Slim\App;
+use Slim\Http\Environment;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Slim\Http\Environment;
-use PHPUnit\Framework\TestCase;
 
 /**
  * This is an example class that shows how you could set up a method that
@@ -40,7 +40,7 @@ class BaseTestCase extends TestCase
         $environment = Environment::mock(
             [
                 'REQUEST_METHOD' => $requestMethod,
-                'REQUEST_URI' => $requestUri
+                'REQUEST_URI'    => $requestUri
             ]
         );
 
