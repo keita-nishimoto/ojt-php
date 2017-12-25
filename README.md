@@ -26,3 +26,27 @@
 - [php-fpmを利用しFastCGIとして実行する](http://php.net/manual/ja/install.fpm.php)
 
 本カリキュラムでは php-fpm を使ってFastCGIで実行する方法をメインに学ぶ予定です。
+
+## Composer
+
+[Composer](https://getcomposer.org/) の簡単な使い方について説明します。
+
+[Composer](https://getcomposer.org/) はPHPのpackage管理ツールです。
+
+似たような物に [PEAR](http://pear.php.net/) がありますが、これは既にレガシーなpackage管理システムなので、現代では [Composer](https://getcomposer.org/) を使うのが一般的です。
+
+この件に限らずネット上ではレガシーなPHPの情報で溢れています。
+
+このような情報に惑わされない為にも [PHP The Right Way](http://ja.phptherightway.com/) を流し読みしておく事をオススメします。
+
+### packageの追加
+
+以下のコマンドをプロジェクトルートで実行すると `composer.json` や `composer.lock` に自動で書き込んでくれるのでオススメです。
+
+- `require` にpackage `friendsofphp/php-cs-fixer` を追加する場合
+
+`composer require friendsofphp/php-cs-fixer`
+
+- `require-dev` にpackage `friendsofphp/php-cs-fixer` を追加する場合
+
+`composer require friendsofphp/php-cs-fixer --dev`
