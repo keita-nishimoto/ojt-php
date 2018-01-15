@@ -14,7 +14,7 @@
 
 [ojt-linux-vagrant](https://github.com/keita-nishimoto/ojt-linux-vagrant) を利用している場合は、以下のURLで確認が出来ます。
 
-`http://192.168.33.10:8080`
+`http://192.168.33.100:8080`
 
 これは、[Built-in web server](http://php.net/manual/ja/features.commandline.webserver.php) と呼ばれるPHPの組み込みサーバです。
 
