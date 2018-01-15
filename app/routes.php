@@ -1,7 +1,9 @@
 <?php
+// Controllerのインスタンスを生成
+$indexController = new \App\Controllers\IndexController();
+
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $router) {
-    $router->addRoute('GET', '/', 'index');
-    $router->addRoute('GET', '/users/{user_id}', 'user');
+    $router->addRoute('GET', '/', '\\App\\Controllers\\IndexController::index');
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];
@@ -33,16 +35,4 @@ switch ($routeInfo[0]) {
         break;
     default:
         break;
-}
-
-function index($vars)
-{
-    require_once __DIR__ . '/views/index.php';
-
-    return show();
-}
-
-function user($vars)
-{
-    echo '🐱🐶🐰';
 }
