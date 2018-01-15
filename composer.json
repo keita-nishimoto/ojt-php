@@ -1,0 +1,36 @@
+{
+    "name": "ojt-php",
+    "description": "PHPの基礎を学ぶ為のリポジトリ",
+    "keywords": ["microframework", "rest", "router", "psr7"],
+    "homepage": "https://github.com/keita-nishimoto/ojt-php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "keita",
+            "homepage": "https://github.com/keita-nishimoto"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "monolog/monolog": "^1.17",
+        "nikic/fast-route": "^1.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5.5",
+        "friendsofphp/php-cs-fixer": "^2.9"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/",
+            "App\\": "app/"
+        }
+    },
+    "config": {
+        "process-timeout" : 0
+    },
+    "scripts": {
+        "start": "php -S 0.0.0.0:8080 -t public public/index.php",
+        "test": "phpunit",
+        "format": "php-cs-fixer fix --diff -v --config .php_cs.dist"
+    }
+}
