@@ -1,10 +1,11 @@
 <?php
 // Controllerのインスタンスを生成
 $indexController = new \App\Controllers\IndexController();
+$userController = new \App\Controllers\UserController();
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $router) {
     $router->addRoute('GET', '/', '\\App\\Controllers\\IndexController::index');
-    $router->addRoute('GET', '/users/{userId}', '\\App\\Controllers\\IndexController::index');
+    $router->addRoute('GET', '/users/{userId}', '\\App\\Controllers\\UserController::show');
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];
@@ -32,9 +33,9 @@ switch ($routeInfo[0]) {
         $request = \Zend\Diactoros\ServerRequestFactory::fromGlobals();
 
         // pathパラメータが入ってくる事を確認
-        $vars = $routeInfo[2];
+        $pathParams = $routeInfo[2];
 
-        echo $handler($request, $vars);
+        echo $handler($request, $pathParams, $twig);
         break;
     default:
         break;
