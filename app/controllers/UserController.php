@@ -2,23 +2,28 @@
 
 namespace App\Controllers;
 
-use Zend\Diactoros\ServerRequest;
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
 
-class UserController
+class UserController extends Controller
 {
-
     /**
      * ユーザーを1件表示する
      *
-     * @param ServerRequest $request
+     * @param Request $request
+     * @param Response $response
      * @param array $pathParams
-     * @param \Twig_Environment $template
      * @return string
      */
-    public function show(ServerRequest $request, array $pathParams = [], \Twig_Environment $template)
-    {
+    public function show(
+        Request $request,
+        Response $response,
+        array $pathParams = []
+    ) {
         try {
-            return $template->render('index.html');
+            $response->getBody()->write($this->getTemplate()->render('users/show.html'));
+
+            return $response;
         } catch (\Twig_Error_Loader | \Twig_Error_Syntax | \Twig_Error_Runtime $e) {
             // TODO 後でエラー処理を追加する
         }
