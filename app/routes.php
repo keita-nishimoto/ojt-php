@@ -1,41 +1,28 @@
 <?php
-// Controllerのインスタンスを生成
-$indexController = new \App\Controllers\IndexController();
+use \Psr\Http\Message\ResponseInterface as Response;
+use \Psr\Http\Message\ServerRequestInterface as Request;
 
-$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $router) {
-    $router->addRoute('GET', '/', '\\App\\Controllers\\IndexController::index');
-    $router->addRoute('GET', '/users/{userId}', '\\App\\Controllers\\IndexController::index');
-});
+try {
+    $app = new \Slim\App;
+    $app->get('/', function (Request $request, Response $response, array $args) {
+        $indexController = new \App\Controllers\IndexController();
+        $indexController->showIndex($request, $response, $args);
 
-$httpMethod = $_SERVER['REQUEST_METHOD'];
-$uri = $_SERVER['REQUEST_URI'];
+        return $response;
+    });
 
-if (false !== $pos = strpos($uri, '?')) {
-    $uri = substr($uri, 0, $pos);
-}
-$uri = rawurldecode($uri);
+    $app->get('/users/{userId}', function (Request $request, Response $response, array $args) {
+        $userController = new \App\Controllers\UserController();
+        $userController->showUser($request, $response, $args);
 
-$routeInfo = $dispatcher->dispatch($httpMethod, $uri);
+        return $response;
+    });
 
-switch ($routeInfo[0]) {
-    case FastRoute\Dispatcher::NOT_FOUND:
-        // ... 404 Not Found
-        break;
-    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
-        $allowedMethods = $routeInfo[1];
-        // ... 405 Method Not Allowed
-        break;
-    case FastRoute\Dispatcher::FOUND:
-        // 実行する関数名が入ってくる
-        $handler = $routeInfo[1];
-
-        $request = \Zend\Diactoros\ServerRequestFactory::fromGlobals();
-
-        // pathパラメータが入ってくる事を確認
-        $vars = $routeInfo[2];
-
-        echo $handler($request, $vars);
-        break;
-    default:
-        break;
+    $app->run();
+} catch (\Slim\Exception\MethodNotAllowedException $e) {
+    // TODO 405 Method Not Allowedのレスポンスを返す
+} catch (\Slim\Exception\NotFoundException $e) {
+    // TODO 404 Not Found のレスポンスを返す
+} catch (\Exception $e) {
+    // TODO ここに入る時は重大な障害が起きているのでシステムエラーのページを表示させる
 }
