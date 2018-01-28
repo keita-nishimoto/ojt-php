@@ -12,9 +12,9 @@ abstract class Controller
     /**
      * Controller constructor.
      */
-    public final function __construct()
+    final public function __construct()
     {
-        $loader = new \Twig_Loader_Filesystem( __DIR__ . '/../../templates');
+        $loader = new \Twig_Loader_Filesystem(__DIR__ . '/../../templates');
         $this->setTemplate(new \Twig_Environment($loader));
     }
 
