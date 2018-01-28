@@ -7,11 +7,19 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 
 class IndexController extends Controller
 {
-    public function index(
+    /**
+     * トップページを表示させる
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param array $pathParams
+     * @return Response
+     */
+    public function showIndex(
         Request $request,
         Response $response,
         array $pathParams = []
-    ) {
+    ): Response {
         try {
             $renderParams = [
                 'title' => 'PHP OJT トップ',

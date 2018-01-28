@@ -13,13 +13,13 @@ class UserController extends Controller
      * @param Request $request
      * @param Response $response
      * @param array $pathParams
-     * @return string
+     * @return Response
      */
-    public function show(
+    public function showUser(
         Request $request,
         Response $response,
         array $pathParams = []
-    ) {
+    ): Response {
         try {
             $renderParams = [
                 'title' => 'PHP OJT ユーザー',

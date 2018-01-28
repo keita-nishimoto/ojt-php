@@ -6,14 +6,14 @@ try {
     $app = new \Slim\App;
     $app->get('/', function (Request $request, Response $response, array $args) {
         $indexController = new \App\Controllers\IndexController();
-        $indexController->index($request, $response, $args);
+        $indexController->showIndex($request, $response, $args);
 
         return $response;
     });
 
     $app->get('/users/{userId}', function (Request $request, Response $response, array $args) {
         $userController = new \App\Controllers\UserController();
-        $userController->show($request, $response, $args);
+        $userController->showUser($request, $response, $args);
 
         return $response;
     });
