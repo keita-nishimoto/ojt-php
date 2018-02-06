@@ -15,7 +15,11 @@ abstract class Controller
     final public function __construct()
     {
         $loader = new \Twig_Loader_Filesystem(__DIR__ . '/../../templates');
-        $this->setTemplate(new \Twig_Environment($loader));
+
+        $twig = new \Twig_Environment($loader, ['debug' => true]);
+        $twig->addExtension(new \Twig_Extension_Debug());
+
+        $this->setTemplate($twig);
     }
 
     /**
