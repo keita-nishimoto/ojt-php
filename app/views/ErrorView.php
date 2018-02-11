@@ -10,7 +10,7 @@ class ErrorView
      *
      * @return string
      */
-    public function notFound(): string
+    public function getNotFoundHtml(): string
     {
         try {
             $loader = new \Twig_Loader_Filesystem(__DIR__ . '/../../templates');

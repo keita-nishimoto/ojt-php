@@ -11,7 +11,7 @@ try {
             return $container['response']
                 ->withStatus(404)
                 ->withHeader('Content-Type', 'text/html')
-                ->write($view->notFound());
+                ->write($view->getNotFoundHtml());
         };
     };
 
