@@ -9,6 +9,9 @@ class ErrorView
      * 404 Not FoundページのHTMLを返す
      *
      * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function getNotFoundHtml(): string
     {
@@ -24,7 +27,7 @@ class ErrorView
 
             return $twig->render('errors/404.html', $renderParams);
         } catch (\Twig_Error_Loader | \Twig_Error_Syntax | \Twig_Error_Runtime $e) {
-            // TODO 後でエラー処理を追加する
+            throw $e;
         }
     }
 
@@ -32,6 +35,9 @@ class ErrorView
      * 405 Method Not AllowedページのHTMLを返す
      *
      * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function getNotAllowedHtml()
     {
@@ -47,7 +53,7 @@ class ErrorView
 
             return $twig->render('errors/405.html', $renderParams);
         } catch (\Twig_Error_Loader | \Twig_Error_Syntax | \Twig_Error_Runtime $e) {
-            // TODO 後でエラー処理を追加する
+            throw $e;
         }
     }
 }
