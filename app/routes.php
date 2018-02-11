@@ -15,6 +15,17 @@ try {
         };
     };
 
+    $container['notAllowedHandler'] = function (\Slim\Container $container) {
+        return function () use ($container) {
+            $view = new \App\Views\ErrorView();
+
+            return $container['response']
+                ->withStatus(405)
+                ->withHeader('Content-Type', 'text/html')
+                ->write($view->getNotAllowedHtml());
+        };
+    };
+
     $app = new \Slim\App($container);
     $app->get('/', function (Request $request, Response $response, array $args) {
         $indexController = new \App\Controllers\IndexController();
