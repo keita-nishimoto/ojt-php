@@ -30,9 +30,6 @@ $app->get('/', function (Request $request, Response $response, array $args) {
     $indexController = new \App\Controllers\IndexController();
     $indexController->showIndex($request, $response, $args);
 
-    $logger = new \App\lib\Logger();
-    $logger->debug($response);
-
     return $response;
 });
 
