@@ -50,27 +50,4 @@ class ErrorView
             // TODO 後でエラー処理を追加する
         }
     }
-
-    /**
-     * 500 Internal Server ErrorページのHTMLを返す
-     *
-     * @return string
-     */
-    public function getInternalServerErrorHtml()
-    {
-        try {
-            $loader = new \Twig_Loader_Filesystem(__DIR__ . '/../../templates');
-
-            $twig = new \Twig_Environment($loader, ['debug' => true]);
-            $twig->addExtension(new \Twig_Extension_Debug());
-
-            $renderParams = [
-                'title' => 'PHP OJT 500 Internal Server Error',
-            ];
-
-            return $twig->render('errors/500.html', $renderParams);
-        } catch (\Twig_Error_Loader | \Twig_Error_Syntax | \Twig_Error_Runtime $e) {
-            // TODO 後でエラー処理を追加する
-        }
-    }
 }
