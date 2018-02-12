@@ -33,6 +33,13 @@ $app->get('/', function (Request $request, Response $response, array $args) {
     return $response;
 });
 
+$app->get('/preregistration', function (Request $request, Response $response) {
+    $preregistrationController = new \App\Controllers\PreregistrationController();
+    $preregistrationController->showForm($request, $response);
+
+    return $response;
+});
+
 $app->get('/users/{userId}', function (Request $request, Response $response, array $args) {
     $userController = new \App\Controllers\UserController();
     $userController->showUser($request, $response, $args);
