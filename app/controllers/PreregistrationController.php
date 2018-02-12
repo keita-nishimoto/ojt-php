@@ -13,6 +13,7 @@ class PreregistrationController extends Controller
      *
      * @param Request $request
      * @param Response $response
+     * @param array $pathParams
      * @return Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
@@ -20,7 +21,8 @@ class PreregistrationController extends Controller
      */
     public function showForm(
         Request $request,
-        Response $response
+        Response $response,
+        array $pathParams = []
     ): Response {
         $renderParams = [
             'title' => 'PHP OJT 仮ユーザー登録',
@@ -36,6 +38,7 @@ class PreregistrationController extends Controller
      *
      * @param Request $request
      * @param Response $response
+     * @param array $pathParams
      * @return Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
@@ -43,7 +46,8 @@ class PreregistrationController extends Controller
      */
     public function showCompleteMessage(
         Request $request,
-        Response $response
+        Response $response,
+        array $pathParams = []
     ): Response {
         $renderParams = [
             'title' => 'PHP OJT 仮ユーザー登録完了',
