@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+<form method="post" action="/registration/DummyToken/confirm">
+  <div class="form-group">
+    <label for="registrationInputEmail1"></label>
+    <input type="email" class="form-control" id="registrationInputEmail1" name="email" value="email@example.com" readonly>
+  </div>
+  <div class="form-group">
+    <label for="registrationInputPassword"></label>
+    <input type="password" class="form-control" id="registrationInputPassword" name="password" aria-describedby="passwordHelp" placeholder="Password">
+    <small id="passwordHelp" class="form-text text-muted">パスワードを入れて下さい。</small>
+  </div>
+  <button type="submit" class="btn btn-primary">送信する</button>
+</form>
+
+{% endblock %}

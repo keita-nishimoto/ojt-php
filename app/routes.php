@@ -47,6 +47,34 @@ $app->get('/preregistration/complete', function (Request $request, Response $res
     return $response;
 });
 
+$app->get('/registration/{token}', function (Request $request, Response $response, array $args) {
+    $registrationController = new \App\Controllers\RegistrationController();
+    $registrationController->showForm($request, $response, $args);
+
+    return $response;
+});
+
+$app->post('/registration/{token}', function (Request $request, Response $response, array $args) {
+    $registrationController = new \App\Controllers\RegistrationController();
+    $registrationController->showForm($request, $response, $args);
+
+    return $response;
+});
+
+$app->post('/registration/{token}/confirm', function (Request $request, Response $response, array $args) {
+    $registrationController = new \App\Controllers\RegistrationController();
+    $registrationController->showConfirmForm($request, $response, $args);
+
+    return $response;
+});
+
+$app->post('/registration/{token}/complete', function (Request $request, Response $response, array $args) {
+    $registrationController = new \App\Controllers\RegistrationController();
+    $registrationController->showCompleteMessage($request, $response, $args);
+
+    return $response;
+});
+
 $app->get('/login', function (Request $request, Response $response) {
     $loginController = new \App\Controllers\LoginController();
     $loginController->showForm($request, $response);
