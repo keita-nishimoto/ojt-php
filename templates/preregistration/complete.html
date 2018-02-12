@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">ユーザー登録用の認証メールを送信しました。</h4>
+  <p>メールに本登録用の認証URLを送信しました。</p>
+  <hr>
+  <p class="mb-0">メールが届かない場合はメールアドレスをご確認下さい。</p>
+</div>
+
+{% endblock %}
