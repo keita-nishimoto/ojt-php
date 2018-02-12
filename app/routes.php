@@ -47,6 +47,13 @@ $app->get('/preregistration/complete', function (Request $request, Response $res
     return $response;
 });
 
+$app->get('/login', function (Request $request, Response $response) {
+    $loginController = new \App\Controllers\LoginController();
+    $loginController->showForm($request, $response);
+
+    return $response;
+});
+
 $app->get('/users/{userId}', function (Request $request, Response $response, array $args) {
     $userController = new \App\Controllers\UserController();
     $userController->showUser($request, $response, $args);

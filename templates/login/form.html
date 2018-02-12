@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+<form method="post" action="">
+  <div class="form-group">
+    <label for="loginInputEmail1"></label>
+    <input type="email" class="form-control" id="loginInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">メールアドレスを入れて下さい。</small>
+  </div>
+  <div class="form-group">
+    <label for="loginInputPassword"></label>
+    <input type="password" class="form-control" id="loginInputPassword" name="password" aria-describedby="passwordHelp" placeholder="Password">
+    <small id="passwordHelp" class="form-text text-muted">パスワードを入れて下さい。</small>
+  </div>
+  <button type="submit" class="btn btn-primary">ログイン</button>
+</form>
+
+{% endblock %}
