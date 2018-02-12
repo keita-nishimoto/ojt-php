@@ -5,10 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title lang="ja">{{ title }}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+      body {
+        min-height: 75rem;
+        padding-top: 4.5rem;
+      }
+    </style>
   </head>
   <body>
     <article>
       <div class="container">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+          <a class="navbar-brand" href="/">PHP OJT</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/preregistration">ユーザー登録</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/login">ログイン</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/users/1">ユーザー情報</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
         {% block content %}
         {% endblock %}
       </div>

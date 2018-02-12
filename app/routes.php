@@ -33,6 +33,55 @@ $app->get('/', function (Request $request, Response $response, array $args) {
     return $response;
 });
 
+$app->get('/preregistration', function (Request $request, Response $response, array $args) {
+    $preregistrationController = new \App\Controllers\PreregistrationController();
+    $preregistrationController->showForm($request, $response, $args);
+
+    return $response;
+});
+
+$app->post('/preregistration/complete', function (Request $request, Response $response, array $args) {
+    $preregistrationController = new \App\Controllers\PreregistrationController();
+    $preregistrationController->showCompleteMessage($request, $response, $args);
+
+    return $response;
+});
+
+$app->get('/registration/{token}', function (Request $request, Response $response, array $args) {
+    $registrationController = new \App\Controllers\RegistrationController();
+    $registrationController->showForm($request, $response, $args);
+
+    return $response;
+});
+
+$app->post('/registration/{token}', function (Request $request, Response $response, array $args) {
+    $registrationController = new \App\Controllers\RegistrationController();
+    $registrationController->showForm($request, $response, $args);
+
+    return $response;
+});
+
+$app->post('/registration/{token}/confirm', function (Request $request, Response $response, array $args) {
+    $registrationController = new \App\Controllers\RegistrationController();
+    $registrationController->showConfirmForm($request, $response, $args);
+
+    return $response;
+});
+
+$app->post('/registration/{token}/complete', function (Request $request, Response $response, array $args) {
+    $registrationController = new \App\Controllers\RegistrationController();
+    $registrationController->showCompleteMessage($request, $response, $args);
+
+    return $response;
+});
+
+$app->get('/login', function (Request $request, Response $response) {
+    $loginController = new \App\Controllers\LoginController();
+    $loginController->showForm($request, $response);
+
+    return $response;
+});
+
 $app->get('/users/{userId}', function (Request $request, Response $response, array $args) {
     $userController = new \App\Controllers\UserController();
     $userController->showUser($request, $response, $args);
