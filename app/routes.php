@@ -33,16 +33,16 @@ $app->get('/', function (Request $request, Response $response, array $args) {
     return $response;
 });
 
-$app->get('/preregistration', function (Request $request, Response $response) {
+$app->get('/preregistration', function (Request $request, Response $response, array $args) {
     $preregistrationController = new \App\Controllers\PreregistrationController();
-    $preregistrationController->showForm($request, $response);
+    $preregistrationController->showForm($request, $response, $args);
 
     return $response;
 });
 
-$app->get('/preregistration/complete', function (Request $request, Response $response) {
+$app->post('/preregistration/complete', function (Request $request, Response $response, array $args) {
     $preregistrationController = new \App\Controllers\PreregistrationController();
-    $preregistrationController->showCompleteMessage($request, $response);
+    $preregistrationController->showCompleteMessage($request, $response, $args);
 
     return $response;
 });
