@@ -1,7 +1,15 @@
 <?php
+/**
+ * UserBuilder
+ */
 
 namespace App\Models\Domain;
 
+/**
+ * Class UserBuilder
+ *
+ * @package App\Models\Domain
+ */
 class UserBuilder
 {
     /**

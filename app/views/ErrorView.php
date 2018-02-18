@@ -1,7 +1,15 @@
 <?php
+/**
+ * ErrorView
+ */
 
 namespace App\Views;
 
+/**
+ * Class ErrorView
+ *
+ * @package App\Views
+ */
 class ErrorView
 {
 
