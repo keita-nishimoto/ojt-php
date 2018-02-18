@@ -3,7 +3,7 @@
 namespace App\Models\Repository;
 
 use App\Models\Domain\User;
-use App\Models\Domain\UserBuilder;
+use App\Models\Factory\UserFactory;
 
 class UserRepository
 {
@@ -14,9 +14,6 @@ class UserRepository
      */
     public function find(int $id): User
     {
-        $userBuilder = new UserBuilder();
-        $userBuilder->setId($id);
-
-        return $userBuilder->build();
+        return UserFactory::create($id);
     }
 }
