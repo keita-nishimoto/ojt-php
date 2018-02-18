@@ -50,3 +50,26 @@
 - `require-dev` にpackage `friendsofphp/php-cs-fixer` を追加する場合
 
 `composer require friendsofphp/php-cs-fixer --dev`
+
+## テストの実行
+
+PHPのテストは [PHPUnit](https://phpunit.de/manual/current/ja/index.html) が良く利用されています。
+
+`composer test` を実行すると `tests` 配下にあるテストクラスが全て実行されます。
+
+下記のように引数にテストクラスを指定すると特定のテストだけを実行する事が可能です。
+
+`composer test tests/app/models/repository/UserRepository/UserRepositoryTest.php`
+
+さらに特定のメソッドだけをテストしたい場合は下記のように `--filter` オプションを指定して実行します。
+
+`vendor/bin/phpunit tests/app/models/repository/UserRepository/UserRepositoryTest.php --filter testSuccess`
+
+※ vendor/bin/phpunit を直接実行しないと `--filter` オプションを実行出来ませんでした。
+方法が判明次第、本ドキュメントに追記します。
+
+## テストの実行（コードカバレッジの出力）
+
+`composer test:coverage` を実行します。
+
+カバレッジレポートがHTML形式で `coverage/` 配下に出力されます。
