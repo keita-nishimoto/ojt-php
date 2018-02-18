@@ -73,3 +73,7 @@ PHPのテストは [PHPUnit](https://phpunit.de/manual/current/ja/index.html) �
 `composer test:coverage` を実行します。
 
 カバレッジレポートがHTML形式で `coverage/` 配下に出力されます。
+
+## PHPDocについて
+
+[公式ドキュメント](https://docs.phpdoc.org/getting-started/your-first-set-of-documentation.html) を参照して下さい。
