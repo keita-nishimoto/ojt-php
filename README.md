@@ -73,3 +73,69 @@ PHPのテストは [PHPUnit](https://phpunit.de/manual/current/ja/index.html) �
 `composer test:coverage` を実行します。
 
 カバレッジレポートがHTML形式で `coverage/` 配下に出力されます。
+
+## PHPDocについて
+
+PHPDocを書きましょう。
+
+全ての項目を書いているとかなりしんどいので重要な部分だけを抜粋しました。
+
+なお書くのはクラスが宣言されているファイルだけでOKです。
+
+下記はクラスの例です。
+
+一見どうでもいいただのコメントに見えますが、ツールで出力した際にこの部分が参照されるので必要になります。
+
+```php
+/**
+ * Logger
+ */
+
+namespace App\lib;
+
+use Monolog\Handler\StreamHandler;
+
+/**
+ * Class Logger
+ *
+ * @package App\lib
+ */
+```
+
+次はクラスに宣言されているメソッドです。
+
+```php
+<?php
+
+// 省略
+
+class UserFactory
+{
+
+    /**
+     * ユーザーオブジェクトを生成する
+     * 
+     * @param int $id
+     * @return User
+     */
+    public static function create(int $id): User
+    {
+        $userBuilder = new UserBuilder();
+        $userBuilder->setId($id);
+
+        return $userBuilder->build();
+    }
+}
+```
+
+ともかく必須なのは `@param` と `@return` です。
+
+これがあるとIDEやテキストエディタによってはコードの補完を行ってくれたりするので結構重要です。
+
+他にも `@throws` も結構大事です。
+
+これはそのメソッドでどのような例外が発生するかを明示する為の物です。
+
+`app/views/ErrorView.php` 等に記載されているので書き方は直接ファイルを参照して下さい。
+
+[公式ドキュメント](https://docs.phpdoc.org/getting-started/your-first-set-of-documentation.html) にも軽く目を通しておいて下さい。

@@ -1,9 +1,17 @@
 <?php
+/**
+ * Logger
+ */
 
 namespace App\lib;
 
 use Monolog\Handler\StreamHandler;
 
+/**
+ * Class Logger
+ *
+ * @package App\lib
+ */
 class Logger
 {
     /**

@@ -1,10 +1,18 @@
 <?php
+/**
+ * UserFactory
+ */
 
 namespace App\Models\Factory;
 
 use App\Models\Domain\User;
 use App\Models\Domain\UserBuilder;
 
+/**
+ * Class UserFactory
+ *
+ * @package App\Models\Factory
+ */
 class UserFactory
 {
 

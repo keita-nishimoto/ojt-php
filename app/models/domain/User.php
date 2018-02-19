@@ -1,7 +1,15 @@
 <?php
+/**
+ * User
+ */
 
 namespace App\Models\Domain;
 
+/**
+ * Class User
+ *
+ * @package App\Models\Domain
+ */
 class User
 {
     /**
