@@ -30,7 +30,7 @@
         "process-timeout" : 0
     },
     "scripts": {
-        "start": "php -S 0.0.0.0:8080 -t public index.php",
+        "start": "php -S 0.0.0.0:8080 -t public public/index.php",
         "test": "phpunit",
         "test:coverage": "phpunit --coverage-html coverage",
         "format": "php-cs-fixer fix --diff -v --config .php_cs.dist"
