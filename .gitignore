@@ -7,3 +7,5 @@
 ojt-php.iml
 .idea
 
+# .env
+.env
