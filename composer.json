@@ -19,7 +19,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^7.0.2",
-        "friendsofphp/php-cs-fixer": "^2.9"
+        "friendsofphp/php-cs-fixer": "^2.9",
+        "phpunit/dbunit": "^4.0"
     },
     "autoload-dev": {
         "psr-4": {
