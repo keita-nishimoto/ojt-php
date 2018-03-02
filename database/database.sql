@@ -1,7 +1,14 @@
 -- データベース 'ojt_php' に対して 'ojt_php' というユーザー名のユーザーを '(YourPassword999)' というパスワードで作成
 -- 'localhost' と '127.0.0.1' の2つを用意しているのは `-h localhost` でも `-h 127.0.0.1` でも両方繋がるようにする為
+CREATE DATABASE ojt_php;
 GRANT ALL ON ojt_php.* TO `ojt_php`@`127.0.0.1` IDENTIFIED BY '(YourPassword999)';
 GRANT ALL ON ojt_php.* TO `ojt_php`@`localhost` IDENTIFIED BY '(YourPassword999)';
+
+-- データベース 'ojt_php_test' に対して 'ojt_php_test' というユーザー名のユーザーを '(YourPassword999)' というパスワードで作成
+-- こちらはテスト実行時のみ利用されるデータベース
+CREATE DATABASE ojt_php_test;
+GRANT ALL ON ojt_php_test.* TO `ojt_php_test`@`127.0.0.1` IDENTIFIED BY '(YourPassword999)';
+GRANT ALL ON ojt_php_test.* TO `ojt_php_test`@`localhost` IDENTIFIED BY '(YourPassword999)';
 
 -- ユーザーの追加や権限の追加を行ったら下記の実行が必要
 FLUSH PRIVILEGES;
