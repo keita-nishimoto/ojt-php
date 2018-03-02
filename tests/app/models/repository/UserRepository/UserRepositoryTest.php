@@ -1,10 +1,18 @@
 <?php
+/**
+ * FindTest
+ */
 
 namespace Tests\App\Models\Repository\UserRepository;
 
 use App\Models\Repository\UserRepository;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class FindTest
+ *
+ * @package Tests\App\Models\Repository\UserRepository
+ */
 class FindTest extends TestCase
 {
     /**
