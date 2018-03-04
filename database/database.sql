@@ -37,3 +37,17 @@ CREATE TABLE `preregistrations_tokens` (
   UNIQUE KEY `uq_preregistrations_tokens_02` (`token`),
   CONSTRAINT `fk_preregistrations_tokens_01` FOREIGN KEY (`register_id`) REFERENCES `preregistrations` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC;
+
+-- 仮ユーザー登録時に指定するメールアドレスを管理するテーブル
+CREATE TABLE `preregistrations_emails` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `register_id` int(10) unsigned NOT NULL,
+  `email` varchar(128) COLLATE utf8mb4_bin NOT NULL,
+  `lock_version` int(10) unsigned NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_preregistrations_emails_01` (`register_id`),
+  KEY `idx_preregistrations_emails_01` (`email`),
+  CONSTRAINT `fk_preregistrations_emails_01` FOREIGN KEY (`register_id`) REFERENCES `preregistrations` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC;
