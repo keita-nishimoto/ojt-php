@@ -35,7 +35,7 @@ class PreregistrationRepository
      */
     public function createToken()
     {
-        $sql = 'INSERT INTO preregisters (is_registered) VALUES (0)';
+        $sql = 'INSERT INTO preregistrations (is_registered) VALUES (0)';
 
         $statement = $this->pdo->prepare($sql);
 
