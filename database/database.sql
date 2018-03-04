@@ -14,7 +14,7 @@ GRANT ALL ON ojt_php_test.* TO `ojt_php_test`@`localhost` IDENTIFIED BY '(YourPa
 FLUSH PRIVILEGES;
 
 -- 仮ユーザー登録で利用するメインテーブル
-CREATE TABLE `preregisters` (
+CREATE TABLE `preregistrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `is_registered` tinyint(1) NOT NULL DEFAULT '0',
   `lock_version` int(10) unsigned NOT NULL DEFAULT '0',
@@ -24,7 +24,7 @@ CREATE TABLE `preregisters` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC;
 
 -- 仮ユーザー登録時に発行する認証トークンを管理するテーブル
-CREATE TABLE `preregisters_tokens` (
+CREATE TABLE `preregistrations_tokens` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `register_id` int(10) unsigned NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_bin NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE `preregisters_tokens` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uq_preregisters_tokens_01` (`register_id`),
-  UNIQUE KEY `uq_preregisters_tokens_02` (`token`),
-  CONSTRAINT `fk_preregisters_tokens_01` FOREIGN KEY (`register_id`) REFERENCES `preregisters` (`id`)
+  UNIQUE KEY `uq_preregistrations_tokens_01` (`register_id`),
+  UNIQUE KEY `uq_preregistrations_tokens_02` (`token`),
+  CONSTRAINT `fk_preregistrations_tokens_01` FOREIGN KEY (`register_id`) REFERENCES `preregistrations` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC;
