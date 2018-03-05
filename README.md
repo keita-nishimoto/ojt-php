@@ -12,6 +12,16 @@
 
 このあたりは Node.jsでもあった npm や yarn と良く似ていますね。
 
+### データベース・MySQLユーザー・テーブルの作成
+
+MySQLのインストールとユーザーの作成を行って下さい。
+
+作成するユーザー情報等は `database/database.sql` を参考にして下さい。
+
+ちなみにMySQLのユーザーやデータベースはともかく、テーブルの管理は [DBマイグレーションツール](https://qiita.com/hypermkt/items/e48ca78f626faf23b41a) を使うのが一般的です。
+
+最初のうちは面倒ですがMySQLの操作に慣れる意味でも手動でデータベースやユーザー、テーブルの作成等を行ってみましょう。
+
 ### サーバの起動
 
 以下のコマンドでサーバを起動させましょう。
@@ -40,8 +50,23 @@
 ファイルの内容は以下の内容を入れて下さい。
 
 ```
+DB_NAME=あなたが決めたデータベース名
 DB_USER=あなたが決めたMySQLのユーザー名
 DB_PASSWORD=あなたが決めたMySQLのユーザーのパスワード
+TEST_DB_NAME=あなたが決めたテスト用データベース名
+TEST_DB_USER=あなたが決めたテスト用MySQLユーザー名
+TEST_DB_PASSWORD=あなたが決めたテスト用MySQLユーザーパスワード
+```
+
+例としては以下のような形になります。
+
+```
+DB_NAME=ojt_php
+DB_USER=ojt_php
+DB_PASSWORD=ZVgvWcO_Zndw3hcC
+TEST_DB_NAME=ojt_php_test
+TEST_DB_USER=ojt_php_test
+TEST_DB_PASSWORD=(YourPassword999)
 ```
 
 `.env` というファイルはセキュリティ的にgitRepositoryで管理するのが良くないとされている情報を入れておく為の物です。
