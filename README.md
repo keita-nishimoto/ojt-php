@@ -40,8 +40,23 @@
 ファイルの内容は以下の内容を入れて下さい。
 
 ```
+DB_NAME=あなたが決めたデータベース名
 DB_USER=あなたが決めたMySQLのユーザー名
 DB_PASSWORD=あなたが決めたMySQLのユーザーのパスワード
+TEST_DB_NAME=あなたが決めたテスト用データベース名
+TEST_DB_USER=あなたが決めたテスト用MySQLユーザー名
+TEST_DB_PASSWORD=あなたが決めたテスト用MySQLユーザーパスワード
+```
+
+例としては以下のような形になります。
+
+```
+DB_NAME=ojt_php
+DB_USER=ojt_php
+DB_PASSWORD=ZVgvWcO_Zndw3hcC
+TEST_DB_NAME=ojt_php_test
+TEST_DB_USER=ojt_php_test
+TEST_DB_PASSWORD=(YourPassword999)
 ```
 
 `.env` というファイルはセキュリティ的にgitRepositoryで管理するのが良くないとされている情報を入れておく為の物です。
