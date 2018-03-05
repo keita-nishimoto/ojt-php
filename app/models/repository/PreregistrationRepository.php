@@ -5,6 +5,10 @@
 
 namespace App\Models\Repository;
 
+use App\Models\Domain\Preregistration;
+use App\Models\Domain\PreregistrationBuilder;
+use App\Models\Domain\PreregistrationValue;
+
 /**
  * Class PreregistrationRepository
  *
@@ -29,16 +33,64 @@ class PreregistrationRepository
 
     /**
      * トークンを作成する
-     * TODO 仮実装
      *
-     * @return bool
+     * @param PreregistrationValue $preregistrationValue
+     * @return Preregistration
      */
-    public function createToken()
+    public function createToken(PreregistrationValue $preregistrationValue): Preregistration
     {
-        $sql = 'INSERT INTO preregistrations (is_registered) VALUES (0)';
+        $sql = '
+          INSERT INTO
+              preregistrations (is_registered)
+          VALUES
+              (0)
+        ';
 
         $statement = $this->pdo->prepare($sql);
 
-        return $statement->execute();
+        $statement->execute();
+
+        $preregistrationId = $this->pdo->lastInsertId();
+
+        $sql = '
+          INSERT INTO
+              preregistrations_tokens (register_id, token, expired_on)
+          VALUES
+              (:register_id, :token, :expired_on)
+        ';
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(':register_id', $preregistrationId);
+        $statement->bindValue(':token', $preregistrationValue->getToken());
+        $statement->bindValue(
+            ':expired_on',
+            $preregistrationValue->getExpiredOn()->format('Y-m-d H:i:s')
+        );
+
+        $statement->execute();
+
+        $sql = '
+            INSERT INTO
+                preregistrations_emails (register_id, email)
+            VALUES
+                (:register_id, :email)
+        ';
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(':register_id', $preregistrationId);
+        $statement->bindValue(':email', $preregistrationValue->getEmail());
+
+        $statement->execute();
+
+        $preregistrationBuilder = new PreregistrationBuilder();
+
+        $preregistrationBuilder->setId($preregistrationId);
+        $preregistrationBuilder->setIsRegistered(false);
+        $preregistrationBuilder->setToken($preregistrationValue->getToken());
+        $preregistrationBuilder->setExpiredOn($preregistrationValue->getExpiredOn());
+        $preregistrationBuilder->setEmail($preregistrationValue->getEmail());
+        $preregistrationBuilder->setLockVersion(0);
+
+        return $preregistrationBuilder->build();
     }
 }
