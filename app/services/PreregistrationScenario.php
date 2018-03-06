@@ -6,6 +6,7 @@
 
 namespace App\Services;
 
+use App\Models\Domain\Preregistration;
 use App\Models\Domain\PreregistrationValueBuilder;
 use App\Models\Repository\PreregistrationRepository;
 use Ramsey\Uuid\Uuid;
@@ -18,6 +19,11 @@ use Ramsey\Uuid\Uuid;
 class PreregistrationScenario
 {
     /**
+     * @var \PDO
+     */
+    private $pdo;
+
+    /**
      * @var PreregistrationRepository
      */
     private $preregistrationRepository;
@@ -25,33 +31,47 @@ class PreregistrationScenario
     /**
      * PreregistrationScenario constructor.
      *
-     * @param PreregistrationRepository $preregistrationRepository
+     * @param \PDO $pdo
      */
-    public function __construct(PreregistrationRepository $preregistrationRepository)
+    public function __construct(\PDO $pdo)
     {
-        $this->preregistrationRepository = $preregistrationRepository;
+        $this->pdo = $pdo;
+        $this->preregistrationRepository = new PreregistrationRepository($this->pdo);
     }
 
     /**
      * 仮ユーザー登録を行う
      *
      * @param array $params
-     * @return \App\Models\Domain\Preregistration
+     * @return Preregistration
      * @throws \Exception
      */
-    public function preregistration(array $params)
+    public function preregistration(array $params): Preregistration
     {
-        $uuid4 = Uuid::uuid4();
-        $expiredOn = new \DateTime();
-        $expiredOn->add(new \DateInterval('P1D'));
+        try {
+            $this->pdo->beginTransaction();
 
-        $builder = new PreregistrationValueBuilder();
-        $builder->setToken($uuid4->toString());
-        $builder->setExpiredOn($expiredOn);
-        $builder->setEmail($params['email']);
+            $uuid4 = Uuid::uuid4();
+            $expiredOn = new \DateTime();
+            $expiredOn->add(new \DateInterval('P1D'));
 
-        $preregistrationValue = $builder->build();
+            $builder = new PreregistrationValueBuilder();
+            $builder->setToken($uuid4->toString());
+            $builder->setExpiredOn($expiredOn);
+            $builder->setEmail($params['email']);
 
-        return $this->preregistrationRepository->createToken($preregistrationValue);
+            $preregistrationValue = $builder->build();
+            $preregistration = $this->preregistrationRepository->createToken($preregistrationValue);
+
+            $this->pdo->commit();
+
+            return $preregistration;
+        } catch (\PDOException $e) {
+            if ($this->pdo->inTransaction()) {
+                $this->pdo->rollBack();
+            }
+
+            throw $e;
+        }
     }
 }

@@ -6,7 +6,6 @@
 
 namespace Tests\App\Models\Domain\PreregistrationScenario;
 
-use App\Models\Repository\PreregistrationRepository;
 use App\Services\PreregistrationScenario;
 use PHPUnit\DbUnit\DataSet\FlatXmlDataSet;
 use Tests\DbTestCase;
@@ -35,9 +34,7 @@ class PreregistrationTest extends DbTestCase
     {
         $pdo = $this->getPdo();
 
-        $repository = new PreregistrationRepository($pdo);
-
-        $preregistrationScenario = new PreregistrationScenario($repository);
+        $preregistrationScenario = new PreregistrationScenario($pdo);
 
         $preregistration = $preregistrationScenario->preregistration(
             ['email' => 'keita.koga.work+1@gmail.com']
