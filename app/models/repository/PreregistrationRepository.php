@@ -14,13 +14,8 @@ use App\Models\Domain\PreregistrationValue;
  *
  * @package App\Models\Repository
  */
-class PreregistrationRepository
+class PreregistrationRepository extends Repository
 {
-    /**
-     * @var \PDO
-     */
-    private $pdo;
-
     /**
      * PreregistrationRepository constructor.
      *
@@ -28,7 +23,7 @@ class PreregistrationRepository
      */
     public function __construct(\PDO $pdo)
     {
-        $this->pdo = $pdo;
+        parent::__construct($pdo);
     }
 
     /**
@@ -46,11 +41,11 @@ class PreregistrationRepository
               (0)
         ';
 
-        $statement = $this->pdo->prepare($sql);
+        $statement = $this->getPdo()->prepare($sql);
 
         $statement->execute();
 
-        $preregistrationId = $this->pdo->lastInsertId();
+        $preregistrationId = $this->getPdo()->lastInsertId();
 
         $sql = '
           INSERT INTO
@@ -59,7 +54,7 @@ class PreregistrationRepository
               (:register_id, :token, :expired_on)
         ';
 
-        $statement = $this->pdo->prepare($sql);
+        $statement = $this->getPdo()->prepare($sql);
         $statement->bindValue(':register_id', $preregistrationId);
         $statement->bindValue(':token', $preregistrationValue->getToken());
         $statement->bindValue(
@@ -76,7 +71,7 @@ class PreregistrationRepository
                 (:register_id, :email)
         ';
 
-        $statement = $this->pdo->prepare($sql);
+        $statement = $this->getPdo()->prepare($sql);
         $statement->bindValue(':register_id', $preregistrationId);
         $statement->bindValue(':email', $preregistrationValue->getEmail());
 
