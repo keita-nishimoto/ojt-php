@@ -4,8 +4,9 @@
  * 仮ユーザー登録のシナリオ
  */
 
-namespace App\Models\Domain;
+namespace App\Services;
 
+use App\Models\Domain\PreregistrationValueBuilder;
 use App\Models\Repository\PreregistrationRepository;
 use Ramsey\Uuid\Uuid;
 
@@ -35,7 +36,7 @@ class PreregistrationScenario
      * 仮ユーザー登録を行う
      *
      * @param array $params
-     * @return Preregistration
+     * @return \App\Models\Domain\Preregistration
      * @throws \Exception
      */
     public function preregistration(array $params)

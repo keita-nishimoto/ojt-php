@@ -6,8 +6,8 @@
 
 namespace Tests\App\Models\Domain\PreregistrationScenario;
 
-use App\Models\Domain\PreregistrationScenario;
 use App\Models\Repository\PreregistrationRepository;
+use App\Services\PreregistrationScenario;
 use PHPUnit\DbUnit\DataSet\FlatXmlDataSet;
 use Tests\DbTestCase;
 
