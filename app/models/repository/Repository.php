@@ -30,7 +30,7 @@ abstract class Repository
     /**
      * @return \PDO
      */
-    public final function getPdo(): \PDO
+    final public function getPdo(): \PDO
     {
         return $this->pdo;
     }
