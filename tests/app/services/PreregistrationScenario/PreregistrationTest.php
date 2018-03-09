@@ -42,7 +42,19 @@ class PreregistrationTest extends DbTestCase
             ['email' => $email]
         );
 
+        // 意図した通りのドメインオブジェクトが返却される事を確認する
         $this->assertInstanceOf('\\App\\Models\\Domain\\Preregistration', $preregistration);
+
+        // 各属性が意図した値かどうかを確認
+        $this->assertSame(
+            2,
+            $preregistration->getId()
+        );
+
+        $this->assertSame(
+            $email,
+            $preregistration->getEmail()
+        );
 
         // 仮ユーザー登録のテーブルが意図した通りに変わっているか確認する
         $this->assertEquals(
