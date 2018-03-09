@@ -36,24 +36,48 @@ class PreregistrationTest extends DbTestCase
 
         $preregistrationScenario = new PreregistrationScenario($pdo);
 
+        $email = 'keita.koga.work+1@gmail.com';
+
         $preregistration = $preregistrationScenario->preregistration(
-            ['email' => 'keita.koga.work+1@gmail.com']
+            ['email' => $email]
         );
 
         $this->assertInstanceOf('\\App\\Models\\Domain\\Preregistration', $preregistration);
 
-        // テーブルの件数が意図した通りに変わっているかを確認
+        // 仮ユーザー登録のテーブルが意図した通りに変わっているか確認する
+        $this->assertEquals(
+            2,
+            $this->getConnection()->getRowCount('preregistrations')
+        );
+
+        $preregistrationsQueryTable = $this->getConnection()->createQueryTable(
+            'preregistrations_tokens',
+            'SELECT * FROM preregistrations'
+        );
+
+        $expectedPreregistrations = [
+            'id'           => '2',
+            'lock_version' => '0',
+        ];
+
+        $actualPreregistrations = [
+            'id'           => $preregistrationsQueryTable->getValue(1, 'id'),
+            'lock_version' => $preregistrationsQueryTable->getValue(1, 'lock_version'),
+        ];
+
+        $this->assertSame($expectedPreregistrations, $actualPreregistrations);
+
+        // トークンが意図した通りに登録されているか確認する
         $this->assertEquals(
             2,
             $this->getConnection()->getRowCount('preregistrations_tokens')
         );
 
-        $queryTable = $this->getConnection()->createQueryTable(
+        $preregistrationsTokensQueryTable = $this->getConnection()->createQueryTable(
             'preregistrations_tokens',
             'SELECT * FROM preregistrations_tokens'
         );
 
-        // テーブルの中身が意図した通りに変わっているかを確認
         $expectedPreregistrationsTokens = [
             'id'           => '2',
             'register_id'  => '2',
@@ -62,12 +86,39 @@ class PreregistrationTest extends DbTestCase
         ];
 
         $actualPreregistrationsTokens = [
-            'id'           => $queryTable->getValue(1, 'id'),
-            'register_id'  => $queryTable->getValue(1, 'register_id'),
-            'token'        => $queryTable->getValue(1, 'token'),
-            'lock_version' => $queryTable->getValue(1, 'lock_version'),
+            'id'           => $preregistrationsTokensQueryTable->getValue(1, 'id'),
+            'register_id'  => $preregistrationsTokensQueryTable->getValue(1, 'register_id'),
+            'token'        => $preregistrationsTokensQueryTable->getValue(1, 'token'),
+            'lock_version' => $preregistrationsTokensQueryTable->getValue(1, 'lock_version'),
         ];
 
         $this->assertSame($expectedPreregistrationsTokens, $actualPreregistrationsTokens);
+
+        // メールアドレスが意図した通りに登録されているか確認する
+        $this->assertEquals(
+            2,
+            $this->getConnection()->getRowCount('preregistrations_emails')
+        );
+
+        $preregistrationsEmailsQueryTable = $this->getConnection()->createQueryTable(
+            'preregistrations_tokens',
+            'SELECT * FROM preregistrations_emails'
+        );
+
+        $expectedPreregistrationsEmails = [
+            'id'           => '2',
+            'register_id'  => '2',
+            'token'        => $email,
+            'lock_version' => '0',
+        ];
+
+        $actualPreregistrationsEmails = [
+            'id'           => $preregistrationsEmailsQueryTable->getValue(1, 'id'),
+            'register_id'  => $preregistrationsEmailsQueryTable->getValue(1, 'register_id'),
+            'token'        => $preregistrationsEmailsQueryTable->getValue(1, 'email'),
+            'lock_version' => $preregistrationsEmailsQueryTable->getValue(1, 'lock_version'),
+        ];
+
+        $this->assertSame($expectedPreregistrationsEmails, $actualPreregistrationsEmails);
     }
 }
