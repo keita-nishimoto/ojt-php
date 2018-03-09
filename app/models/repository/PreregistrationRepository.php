@@ -34,6 +34,31 @@ class PreregistrationRepository extends Repository
      */
     public function createToken(PreregistrationValue $preregistrationValue): Preregistration
     {
+        $preregistrationId = $this->savePreregistrations();
+
+        $this->savePreregistrationsTokens($preregistrationValue, $preregistrationId);
+
+        $this->savePreregistrationsEmails($preregistrationValue, $preregistrationId);
+
+        $preregistrationBuilder = new PreregistrationBuilder();
+
+        $preregistrationBuilder->setId($preregistrationId);
+        $preregistrationBuilder->setIsRegistered(false);
+        $preregistrationBuilder->setToken($preregistrationValue->getToken());
+        $preregistrationBuilder->setExpiredOn($preregistrationValue->getExpiredOn());
+        $preregistrationBuilder->setEmail($preregistrationValue->getEmail());
+        $preregistrationBuilder->setLockVersion(0);
+
+        return $preregistrationBuilder->build();
+    }
+
+    /**
+     * preregistrations テーブルにデータを保存する
+     *
+     * @return int
+     */
+    private function savePreregistrations(): int
+    {
         $sql = '
           INSERT INTO
               preregistrations (is_registered)
@@ -45,8 +70,19 @@ class PreregistrationRepository extends Repository
 
         $statement->execute();
 
-        $preregistrationId = $this->getPdo()->lastInsertId();
+        return intval($this->getPdo()->lastInsertId());
+    }
 
+    /**
+     * preregistrations_tokens テーブルにデータを保存する
+     *
+     * @param PreregistrationValue $preregistrationValue
+     * @param int $preregistrationId
+     */
+    private function savePreregistrationsTokens(
+        PreregistrationValue $preregistrationValue,
+        int $preregistrationId
+    ): void {
         $sql = '
           INSERT INTO
               preregistrations_tokens (register_id, token, expired_on)
@@ -63,7 +99,18 @@ class PreregistrationRepository extends Repository
         );
 
         $statement->execute();
+    }
 
+    /**
+     * preregistrations_emails テーブルにデータを保存する
+     *
+     * @param PreregistrationValue $preregistrationValue
+     * @param int $preregistrationId
+     */
+    private function savePreregistrationsEmails(
+        PreregistrationValue $preregistrationValue,
+        int $preregistrationId
+    ): void {
         $sql = '
             INSERT INTO
                 preregistrations_emails (register_id, email)
@@ -76,16 +123,5 @@ class PreregistrationRepository extends Repository
         $statement->bindValue(':email', $preregistrationValue->getEmail());
 
         $statement->execute();
-
-        $preregistrationBuilder = new PreregistrationBuilder();
-
-        $preregistrationBuilder->setId($preregistrationId);
-        $preregistrationBuilder->setIsRegistered(false);
-        $preregistrationBuilder->setToken($preregistrationValue->getToken());
-        $preregistrationBuilder->setExpiredOn($preregistrationValue->getExpiredOn());
-        $preregistrationBuilder->setEmail($preregistrationValue->getEmail());
-        $preregistrationBuilder->setLockVersion(0);
-
-        return $preregistrationBuilder->build();
     }
 }
