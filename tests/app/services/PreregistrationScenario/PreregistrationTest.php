@@ -37,6 +37,10 @@ class PreregistrationTest extends DbTestCase
         $preregistrationScenario = new PreregistrationScenario($pdo);
 
         $email = 'keita.koga.work+1@gmail.com';
+        $nowDate = $expectedExpiredOn = new \DateTime();
+
+        $expectedExpiredOn = new \DateTime();
+        $expectedExpiredOn->add(new \DateInterval('P1D'));
 
         $preregistration = $preregistrationScenario->preregistration(
             ['email' => $email]
@@ -57,6 +61,11 @@ class PreregistrationTest extends DbTestCase
         );
 
         $this->assertSame(
+            $expectedExpiredOn->format('Y-m-d'),
+            $preregistration->getExpiredOn()->format('Y-m-d')
+        );
+
+        $this->assertSame(
             $email,
             $preregistration->getEmail()
         );
@@ -72,16 +81,28 @@ class PreregistrationTest extends DbTestCase
             'SELECT * FROM preregistrations'
         );
 
+        $expectedCreatedAt = new \DateTime(
+            $preregistrationsQueryTable->getValue(1, 'created_at')
+        );
+
+        $expectedUpdatedAt = new \DateTime(
+            $preregistrationsQueryTable->getValue(1, 'updated_at')
+        );
+
         $expectedPreregistrations = [
             'id'            => '2',
             'is_registered' => '0',
             'lock_version'  => '0',
+            'created_at'    => $nowDate->format('Y-m-d'),
+            'updated_at'    => $nowDate->format('Y-m-d'),
         ];
 
         $actualPreregistrations = [
             'id'            => $preregistrationsQueryTable->getValue(1, 'id'),
             'is_registered' => $preregistrationsQueryTable->getValue(1, 'is_registered'),
             'lock_version'  => $preregistrationsQueryTable->getValue(1, 'lock_version'),
+            'created_at'    => $expectedCreatedAt->format('Y-m-d'),
+            'updated_at'    => $expectedUpdatedAt->format('Y-m-d'),
         ];
 
         $this->assertSame($expectedPreregistrations, $actualPreregistrations);
@@ -102,13 +123,25 @@ class PreregistrationTest extends DbTestCase
             'register_id'  => '2',
             'token'        => $preregistration->getToken(),
             'lock_version' => '0',
+            'created_at'   => $nowDate->format('Y-m-d'),
+            'updated_at'   => $nowDate->format('Y-m-d'),
         ];
+
+        $expectedCreatedAt = new \DateTime(
+            $preregistrationsTokensQueryTable->getValue(1, 'created_at')
+        );
+
+        $expectedUpdatedAt = new \DateTime(
+            $preregistrationsTokensQueryTable->getValue(1, 'updated_at')
+        );
 
         $actualPreregistrationsTokens = [
             'id'           => $preregistrationsTokensQueryTable->getValue(1, 'id'),
             'register_id'  => $preregistrationsTokensQueryTable->getValue(1, 'register_id'),
             'token'        => $preregistrationsTokensQueryTable->getValue(1, 'token'),
             'lock_version' => $preregistrationsTokensQueryTable->getValue(1, 'lock_version'),
+            'created_at'   => $expectedCreatedAt->format('Y-m-d'),
+            'updated_at'   => $expectedUpdatedAt->format('Y-m-d'),
         ];
 
         $this->assertSame($expectedPreregistrationsTokens, $actualPreregistrationsTokens);
@@ -129,13 +162,25 @@ class PreregistrationTest extends DbTestCase
             'register_id'  => '2',
             'token'        => $email,
             'lock_version' => '0',
+            'created_at'   => $nowDate->format('Y-m-d'),
+            'updated_at'   => $nowDate->format('Y-m-d'),
         ];
+
+        $expectedCreatedAt = new \DateTime(
+            $preregistrationsEmailsQueryTable->getValue(1, 'created_at')
+        );
+
+        $expectedUpdatedAt = new \DateTime(
+            $preregistrationsEmailsQueryTable->getValue(1, 'updated_at')
+        );
 
         $actualPreregistrationsEmails = [
             'id'           => $preregistrationsEmailsQueryTable->getValue(1, 'id'),
             'register_id'  => $preregistrationsEmailsQueryTable->getValue(1, 'register_id'),
             'token'        => $preregistrationsEmailsQueryTable->getValue(1, 'email'),
             'lock_version' => $preregistrationsEmailsQueryTable->getValue(1, 'lock_version'),
+            'created_at'   => $expectedCreatedAt->format('Y-m-d'),
+            'updated_at'   => $expectedUpdatedAt->format('Y-m-d'),
         ];
 
         $this->assertSame($expectedPreregistrationsEmails, $actualPreregistrationsEmails);
