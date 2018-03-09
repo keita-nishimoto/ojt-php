@@ -52,6 +52,11 @@ class PreregistrationTest extends DbTestCase
         );
 
         $this->assertSame(
+            false,
+            $preregistration->isRegistered()
+        );
+
+        $this->assertSame(
             $email,
             $preregistration->getEmail()
         );
@@ -68,13 +73,15 @@ class PreregistrationTest extends DbTestCase
         );
 
         $expectedPreregistrations = [
-            'id'           => '2',
-            'lock_version' => '0',
+            'id'            => '2',
+            'is_registered' => '0',
+            'lock_version'  => '0',
         ];
 
         $actualPreregistrations = [
-            'id'           => $preregistrationsQueryTable->getValue(1, 'id'),
-            'lock_version' => $preregistrationsQueryTable->getValue(1, 'lock_version'),
+            'id'            => $preregistrationsQueryTable->getValue(1, 'id'),
+            'is_registered' => $preregistrationsQueryTable->getValue(1, 'is_registered'),
+            'lock_version'  => $preregistrationsQueryTable->getValue(1, 'lock_version'),
         ];
 
         $this->assertSame($expectedPreregistrations, $actualPreregistrations);
