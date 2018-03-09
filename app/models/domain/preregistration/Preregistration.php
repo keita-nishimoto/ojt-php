@@ -4,7 +4,7 @@
  * 仮ユーザー登録のEntity
  */
 
-namespace App\Models\Domain;
+namespace App\Models\Domain\Preregistration;
 
 /**
  * Class Preregistration

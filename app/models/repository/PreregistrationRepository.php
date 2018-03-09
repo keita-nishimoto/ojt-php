@@ -5,9 +5,9 @@
 
 namespace App\Models\Repository;
 
-use App\Models\Domain\Preregistration;
-use App\Models\Domain\PreregistrationBuilder;
-use App\Models\Domain\PreregistrationValue;
+use App\Models\Domain\Preregistration\Preregistration;
+use App\Models\Domain\Preregistration\PreregistrationBuilder;
+use App\Models\Domain\Preregistration\PreregistrationValue;
 
 /**
  * Class PreregistrationRepository

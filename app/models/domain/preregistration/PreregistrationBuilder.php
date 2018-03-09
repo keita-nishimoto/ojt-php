@@ -3,7 +3,7 @@
  * PreregistrationBuilder
  */
 
-namespace App\Models\Domain;
+namespace App\Models\Domain\Preregistration;
 
 /**
  * Class PreregistrationBuilder

@@ -47,7 +47,7 @@ class PreregistrationTest extends DbTestCase
         );
 
         // 意図した通りのドメインオブジェクトが返却される事を確認する
-        $this->assertInstanceOf('\\App\\Models\\Domain\\Preregistration', $preregistration);
+        $this->assertInstanceOf('\\App\\Models\\Domain\\Preregistration\\Preregistration', $preregistration);
 
         // 各属性が意図した値かどうかを確認
         $this->assertSame(

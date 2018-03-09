@@ -6,8 +6,8 @@
 
 namespace App\Services;
 
-use App\Models\Domain\Preregistration;
-use App\Models\Domain\PreregistrationValueBuilder;
+use App\Models\Domain\Preregistration\Preregistration;
+use App\Models\Domain\Preregistration\PreregistrationValueBuilder;
 use App\Models\Repository\PreregistrationRepository;
 use Ramsey\Uuid\Uuid;
 
