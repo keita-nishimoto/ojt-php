@@ -41,5 +41,33 @@ class PreregistrationTest extends DbTestCase
         );
 
         $this->assertInstanceOf('\\App\\Models\\Domain\\Preregistration', $preregistration);
+
+        // テーブルの件数が意図した通りに変わっているかを確認
+        $this->assertEquals(
+            2,
+            $this->getConnection()->getRowCount('preregistrations_tokens')
+        );
+
+        $queryTable = $this->getConnection()->createQueryTable(
+            'preregistrations_tokens',
+            'SELECT * FROM preregistrations_tokens'
+        );
+
+        // テーブルの中身が意図した通りに変わっているかを確認
+        $expectedPreregistrationsTokens = [
+            'id'           => '2',
+            'register_id'  => '2',
+            'token'        => $preregistration->getToken(),
+            'lock_version' => '0',
+        ];
+
+        $actualPreregistrationsTokens = [
+            'id'           => $queryTable->getValue(1, 'id'),
+            'register_id'  => $queryTable->getValue(1, 'register_id'),
+            'token'        => $queryTable->getValue(1, 'token'),
+            'lock_version' => $queryTable->getValue(1, 'lock_version'),
+        ];
+
+        $this->assertSame($expectedPreregistrationsTokens, $actualPreregistrationsTokens);
     }
 }
