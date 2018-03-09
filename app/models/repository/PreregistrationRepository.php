@@ -5,8 +5,8 @@
 
 namespace App\Models\Repository;
 
-use App\Models\Domain\Preregistration\Preregistration;
-use App\Models\Domain\Preregistration\PreregistrationBuilder;
+use App\Models\Domain\Preregistration\PreregistrationEntity;
+use App\Models\Domain\Preregistration\PreregistrationEntityBuilder;
 use App\Models\Domain\Preregistration\PreregistrationValue;
 
 /**
@@ -30,9 +30,9 @@ class PreregistrationRepository extends Repository
      * トークンを作成する
      *
      * @param PreregistrationValue $preregistrationValue
-     * @return Preregistration
+     * @return PreregistrationEntity
      */
-    public function createToken(PreregistrationValue $preregistrationValue): Preregistration
+    public function createToken(PreregistrationValue $preregistrationValue): PreregistrationEntity
     {
         $preregistrationId = $this->savePreregistrations();
 
@@ -40,7 +40,7 @@ class PreregistrationRepository extends Repository
 
         $this->savePreregistrationsEmails($preregistrationValue, $preregistrationId);
 
-        $preregistrationBuilder = new PreregistrationBuilder();
+        $preregistrationBuilder = new PreregistrationEntityBuilder();
 
         $preregistrationBuilder->setId($preregistrationId);
         $preregistrationBuilder->setIsRegistered(false);

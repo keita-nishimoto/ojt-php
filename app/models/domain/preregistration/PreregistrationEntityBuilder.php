@@ -1,16 +1,16 @@
 <?php
 /**
- * PreregistrationBuilder
+ * PreregistrationEntityBuilder
  */
 
 namespace App\Models\Domain\Preregistration;
 
 /**
- * Class PreregistrationBuilder
+ * Class PreregistrationEntityBuilder
  *
  * @package App\Models\Domain
  */
-class PreregistrationBuilder
+class PreregistrationEntityBuilder
 {
     /**
      * 識別子
@@ -151,10 +151,10 @@ class PreregistrationBuilder
     }
 
     /**
-     * @return Preregistration
+     * @return PreregistrationEntity
      */
-    public function build(): Preregistration
+    public function build(): PreregistrationEntity
     {
-        return new Preregistration($this);
+        return new PreregistrationEntity($this);
     }
 }

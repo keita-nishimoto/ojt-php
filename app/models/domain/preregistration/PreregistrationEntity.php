@@ -1,17 +1,17 @@
 <?php
 /**
- * Preregistration
+ * PreregistrationEntity
  * 仮ユーザー登録のEntity
  */
 
 namespace App\Models\Domain\Preregistration;
 
 /**
- * Class Preregistration
+ * Class PreregistrationEntity
  *
  * @package App\Models\Domain
  */
-class Preregistration
+class PreregistrationEntity
 {
     /**
      * 識別子
@@ -58,9 +58,9 @@ class Preregistration
     /**
      * Preregistration constructor.
      *
-     * @param PreregistrationBuilder $builder
+     * @param PreregistrationEntityBuilder $builder
      */
-    public function __construct(PreregistrationBuilder $builder)
+    public function __construct(PreregistrationEntityBuilder $builder)
     {
         $this->id = $builder->getId();
         $this->isRegistered = $builder->isRegistered();
