@@ -1,16 +1,16 @@
 <?php
 /**
- * TokenEntityBuilder
+ * TokenValueBuilder
  */
 
 namespace App\Models\Domain\Preregistration;
 
 /**
- * Class TokenEntityBuilder
+ * Class TokenValueBuilder
  *
  * @package App\Models\Domain\Preregistration
  */
-class TokenEntityBuilder
+class TokenValueBuilder
 {
 
     /**
@@ -60,10 +60,10 @@ class TokenEntityBuilder
     }
 
     /**
-     * @return TokenEntity
+     * @return TokenValue
      */
     public function build()
     {
-        return new TokenEntity($this);
+        return new TokenValue($this);
     }
 }

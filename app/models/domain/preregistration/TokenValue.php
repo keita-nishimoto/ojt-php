@@ -1,16 +1,16 @@
 <?php
 /**
- * TokenEntity
+ * TokenValue
  */
 
 namespace App\Models\Domain\Preregistration;
 
 /**
- * Class TokenEntity
+ * Class TokenValue
  *
  * @package App\Models\Domain\Preregistration
  */
-class TokenEntity
+class TokenValue
 {
 
     /**
@@ -28,11 +28,11 @@ class TokenEntity
     private $expiredOn;
 
     /**
-     * TokenEntity constructor.
+     * TokenValue constructor.
      *
-     * @param TokenEntityBuilder $builder
+     * @param TokenValueBuilder $builder
      */
-    public function __construct(TokenEntityBuilder $builder)
+    public function __construct(TokenValueBuilder $builder)
     {
         $this->token = $builder->getToken();
         $this->expiredOn = $builder->getExpiredOn();

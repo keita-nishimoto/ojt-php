@@ -27,9 +27,9 @@ class PreregistrationEntityBuilder
     private $isRegistered;
 
     /**
-     * @var TokenEntity
+     * @var TokenValue
      */
-    private $tokenEntity;
+    private $tokenValue;
 
     /**
      * @var EmailValue
@@ -76,19 +76,19 @@ class PreregistrationEntityBuilder
     }
 
     /**
-     * @return TokenEntity
+     * @return TokenValue
      */
-    public function getTokenEntity(): TokenEntity
+    public function getTokenValue(): TokenValue
     {
-        return $this->tokenEntity;
+        return $this->tokenValue;
     }
 
     /**
-     * @param TokenEntity $tokenEntity
+     * @param TokenValue $tokenValue
      */
-    public function setTokenEntity(TokenEntity $tokenEntity): void
+    public function setTokenValue(TokenValue $tokenValue): void
     {
-        $this->tokenEntity = $tokenEntity;
+        $this->tokenValue = $tokenValue;
     }
 
     /**

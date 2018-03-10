@@ -9,7 +9,7 @@ use App\Models\Domain\Preregistration\EmailValue;
 use App\Models\Domain\Preregistration\PreregistrationEntity;
 use App\Models\Domain\Preregistration\PreregistrationEntityBuilder;
 use App\Models\Domain\Preregistration\PreregistrationValue;
-use App\Models\Domain\Preregistration\TokenEntityBuilder;
+use App\Models\Domain\Preregistration\TokenValueBuilder;
 
 /**
  * Class PreregistrationRepository
@@ -42,22 +42,22 @@ class PreregistrationRepository extends Repository
 
         $this->savePreregistrationsEmails($preregistrationValue, $preregistrationId);
 
-        $preregistrationBuilder = new PreregistrationEntityBuilder();
-        $preregistrationBuilder->setId($preregistrationId);
-        $preregistrationBuilder->setIsRegistered(false);
+        $preregistrationEntityBuilder = new PreregistrationEntityBuilder();
+        $preregistrationEntityBuilder->setId($preregistrationId);
+        $preregistrationEntityBuilder->setIsRegistered(false);
 
-        $tokenEntityBuilder = new TokenEntityBuilder();
-        $tokenEntityBuilder->setToken($preregistrationValue->getToken());
-        $tokenEntityBuilder->setExpiredOn($preregistrationValue->getExpiredOn());
+        $tokenValueBuilder = new TokenValueBuilder();
+        $tokenValueBuilder->setToken($preregistrationValue->getToken());
+        $tokenValueBuilder->setExpiredOn($preregistrationValue->getExpiredOn());
 
-        $preregistrationBuilder->setTokenEntity($tokenEntityBuilder->build());
+        $preregistrationEntityBuilder->setTokenValue($tokenValueBuilder->build());
 
         $emailValue = new EmailValue($preregistrationValue->getEmail());
 
-        $preregistrationBuilder->setEmailValue($emailValue);
-        $preregistrationBuilder->setLockVersion(0);
+        $preregistrationEntityBuilder->setEmailValue($emailValue);
+        $preregistrationEntityBuilder->setLockVersion(0);
 
-        return $preregistrationBuilder->build();
+        return $preregistrationEntityBuilder->build();
     }
 
     /**

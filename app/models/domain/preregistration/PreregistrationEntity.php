@@ -28,9 +28,9 @@ class PreregistrationEntity
     private $isRegistered;
 
     /**
-     * @var TokenEntity
+     * @var TokenValue
      */
-    private $tokenEntity;
+    private $tokenValue;
 
     /**
      * @var EmailValue
@@ -53,7 +53,7 @@ class PreregistrationEntity
     {
         $this->id = $builder->getId();
         $this->isRegistered = $builder->isRegistered();
-        $this->tokenEntity = $builder->getTokenEntity();
+        $this->tokenValue = $builder->getTokenValue();
         $this->emailValue = $builder->getEmailValue();
         $this->lockVersion = $builder->getLockVersion();
     }
@@ -75,11 +75,11 @@ class PreregistrationEntity
     }
 
     /**
-     * @return TokenEntity
+     * @return TokenValue
      */
-    public function getTokenEntity(): TokenEntity
+    public function getTokenValue(): TokenValue
     {
-        return $this->tokenEntity;
+        return $this->tokenValue;
     }
 
     /**

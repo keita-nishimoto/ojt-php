@@ -62,7 +62,7 @@ class PreregistrationTest extends DbTestCase
 
         $this->assertSame(
             $expectedExpiredOn->format('Y-m-d'),
-            $preregistrationEntity->getTokenEntity()->getExpiredOn()->format('Y-m-d')
+            $preregistrationEntity->getTokenValue()->getExpiredOn()->format('Y-m-d')
         );
 
         $this->assertSame(
@@ -121,7 +121,7 @@ class PreregistrationTest extends DbTestCase
         $expectedPreregistrationsTokens = [
             'id'           => '2',
             'register_id'  => '2',
-            'token'        => $preregistrationEntity->getTokenEntity()->getToken(),
+            'token'        => $preregistrationEntity->getTokenValue()->getToken(),
             'lock_version' => '0',
             'created_at'   => $nowDate->format('Y-m-d'),
             'updated_at'   => $nowDate->format('Y-m-d'),
