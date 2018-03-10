@@ -34,13 +34,6 @@ class TokenEntity
     private $expiredOn;
 
     /**
-     * バージョン
-     *
-     * @var int
-     */
-    private $lockVersion;
-
-    /**
      * TokenEntity constructor.
      *
      * @param TokenEntityBuilder $builder
@@ -50,7 +43,6 @@ class TokenEntity
         $this->id = $builder->getId();
         $this->token = $builder->getToken();
         $this->expiredOn = $builder->getExpiredOn();
-        $this->lockVersion = $builder->getLockVersion();
     }
 
     /**
@@ -75,13 +67,5 @@ class TokenEntity
     public function getExpiredOn(): \DateTime
     {
         return $this->expiredOn;
-    }
-
-    /**
-     * @return int
-     */
-    public function getLockVersion(): int
-    {
-        return $this->lockVersion;
     }
 }
