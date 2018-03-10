@@ -28,25 +28,14 @@ class PreregistrationEntity
     private $isRegistered;
 
     /**
-     * トークン
-     *
-     * @var string
+     * @var TokenEntity
      */
-    private $token;
+    private $tokenEntity;
 
     /**
-     * 有効期限切れになる日時
-     *
-     * @var \DateTime
+     * @var EmailValue
      */
-    private $expiredOn;
-
-    /**
-     * メールアドレス
-     *
-     * @var string
-     */
-    private $email;
+    private $emailValue;
 
     /**
      * バージョン
@@ -64,9 +53,8 @@ class PreregistrationEntity
     {
         $this->id = $builder->getId();
         $this->isRegistered = $builder->isRegistered();
-        $this->token = $builder->getToken();
-        $this->expiredOn = $builder->getExpiredOn();
-        $this->email = $builder->getEmail();
+        $this->tokenEntity = $builder->getTokenEntity();
+        $this->emailValue = $builder->getEmailValue();
         $this->lockVersion = $builder->getLockVersion();
     }
 
@@ -87,27 +75,19 @@ class PreregistrationEntity
     }
 
     /**
-     * @return string
+     * @return TokenEntity
      */
-    public function getToken(): string
+    public function getTokenEntity(): TokenEntity
     {
-        return $this->token;
+        return $this->tokenEntity;
     }
 
     /**
-     * @return \DateTime
+     * @return EmailValue
      */
-    public function getExpiredOn(): \DateTime
+    public function getEmailValue(): EmailValue
     {
-        return $this->expiredOn;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmail(): string
-    {
-        return $this->email;
+        return $this->emailValue;
     }
 
     /**

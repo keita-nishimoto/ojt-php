@@ -5,9 +5,11 @@
 
 namespace App\Models\Repository;
 
+use App\Models\Domain\Preregistration\EmailValue;
 use App\Models\Domain\Preregistration\PreregistrationEntity;
 use App\Models\Domain\Preregistration\PreregistrationEntityBuilder;
 use App\Models\Domain\Preregistration\PreregistrationValue;
+use App\Models\Domain\Preregistration\TokenEntityBuilder;
 
 /**
  * Class PreregistrationRepository
@@ -41,12 +43,18 @@ class PreregistrationRepository extends Repository
         $this->savePreregistrationsEmails($preregistrationValue, $preregistrationId);
 
         $preregistrationBuilder = new PreregistrationEntityBuilder();
-
         $preregistrationBuilder->setId($preregistrationId);
         $preregistrationBuilder->setIsRegistered(false);
-        $preregistrationBuilder->setToken($preregistrationValue->getToken());
-        $preregistrationBuilder->setExpiredOn($preregistrationValue->getExpiredOn());
-        $preregistrationBuilder->setEmail($preregistrationValue->getEmail());
+
+        $tokenEntityBuilder = new TokenEntityBuilder();
+        $tokenEntityBuilder->setToken($preregistrationValue->getToken());
+        $tokenEntityBuilder->setExpiredOn($preregistrationValue->getExpiredOn());
+
+        $preregistrationBuilder->setTokenEntity($tokenEntityBuilder->build());
+
+        $emailValue = new EmailValue($preregistrationValue->getEmail());
+
+        $preregistrationBuilder->setEmailValue($emailValue);
         $preregistrationBuilder->setLockVersion(0);
 
         return $preregistrationBuilder->build();

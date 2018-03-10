@@ -27,25 +27,14 @@ class PreregistrationEntityBuilder
     private $isRegistered;
 
     /**
-     * トークン
-     *
-     * @var string
+     * @var TokenEntity
      */
-    private $token;
+    private $tokenEntity;
 
     /**
-     * 有効期限切れになる日時
-     *
-     * @var \DateTime
+     * @var EmailValue
      */
-    private $expiredOn;
-
-    /**
-     * メールアドレス
-     *
-     * @var string
-     */
-    private $email;
+    private $emailValue;
 
     /**
      * バージョン
@@ -87,51 +76,35 @@ class PreregistrationEntityBuilder
     }
 
     /**
-     * @return string
+     * @return TokenEntity
      */
-    public function getToken(): string
+    public function getTokenEntity(): TokenEntity
     {
-        return $this->token;
+        return $this->tokenEntity;
     }
 
     /**
-     * @param string $token
+     * @param TokenEntity $tokenEntity
      */
-    public function setToken(string $token): void
+    public function setTokenEntity(TokenEntity $tokenEntity): void
     {
-        $this->token = $token;
+        $this->tokenEntity = $tokenEntity;
     }
 
     /**
-     * @return \DateTime
+     * @return EmailValue
      */
-    public function getExpiredOn(): \DateTime
+    public function getEmailValue(): EmailValue
     {
-        return $this->expiredOn;
+        return $this->emailValue;
     }
 
     /**
-     * @param \DateTime $expiredOn
+     * @param EmailValue $emailValue
      */
-    public function setExpiredOn(\DateTime $expiredOn): void
+    public function setEmailValue(EmailValue $emailValue): void
     {
-        $this->expiredOn = $expiredOn;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param string $email
-     */
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
+        $this->emailValue = $emailValue;
     }
 
     /**

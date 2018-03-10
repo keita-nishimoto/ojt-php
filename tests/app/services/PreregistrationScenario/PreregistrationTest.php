@@ -62,12 +62,12 @@ class PreregistrationTest extends DbTestCase
 
         $this->assertSame(
             $expectedExpiredOn->format('Y-m-d'),
-            $preregistrationEntity->getExpiredOn()->format('Y-m-d')
+            $preregistrationEntity->getTokenEntity()->getExpiredOn()->format('Y-m-d')
         );
 
         $this->assertSame(
             $email,
-            $preregistrationEntity->getEmail()
+            $preregistrationEntity->getEmailValue()->getEmail()
         );
 
         // 仮ユーザー登録のテーブルが意図した通りに変わっているか確認する
@@ -121,7 +121,7 @@ class PreregistrationTest extends DbTestCase
         $expectedPreregistrationsTokens = [
             'id'           => '2',
             'register_id'  => '2',
-            'token'        => $preregistrationEntity->getToken(),
+            'token'        => $preregistrationEntity->getTokenEntity()->getToken(),
             'lock_version' => '0',
             'created_at'   => $nowDate->format('Y-m-d'),
             'updated_at'   => $nowDate->format('Y-m-d'),
