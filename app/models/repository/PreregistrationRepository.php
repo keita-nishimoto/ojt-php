@@ -5,9 +5,11 @@
 
 namespace App\Models\Repository;
 
-use App\Models\Domain\Preregistration;
-use App\Models\Domain\PreregistrationBuilder;
-use App\Models\Domain\PreregistrationValue;
+use App\Models\Domain\Preregistration\EmailValue;
+use App\Models\Domain\Preregistration\PreregistrationEntity;
+use App\Models\Domain\Preregistration\PreregistrationEntityBuilder;
+use App\Models\Domain\Preregistration\PreregistrationValue;
+use App\Models\Domain\Preregistration\TokenValueBuilder;
 
 /**
  * Class PreregistrationRepository
@@ -30,9 +32,9 @@ class PreregistrationRepository extends Repository
      * トークンを作成する
      *
      * @param PreregistrationValue $preregistrationValue
-     * @return Preregistration
+     * @return PreregistrationEntity
      */
-    public function createToken(PreregistrationValue $preregistrationValue): Preregistration
+    public function createToken(PreregistrationValue $preregistrationValue): PreregistrationEntity
     {
         $preregistrationId = $this->savePreregistrations();
 
@@ -40,16 +42,22 @@ class PreregistrationRepository extends Repository
 
         $this->savePreregistrationsEmails($preregistrationValue, $preregistrationId);
 
-        $preregistrationBuilder = new PreregistrationBuilder();
+        $preregistrationEntityBuilder = new PreregistrationEntityBuilder();
+        $preregistrationEntityBuilder->setId($preregistrationId);
+        $preregistrationEntityBuilder->setIsRegistered(false);
 
-        $preregistrationBuilder->setId($preregistrationId);
-        $preregistrationBuilder->setIsRegistered(false);
-        $preregistrationBuilder->setToken($preregistrationValue->getToken());
-        $preregistrationBuilder->setExpiredOn($preregistrationValue->getExpiredOn());
-        $preregistrationBuilder->setEmail($preregistrationValue->getEmail());
-        $preregistrationBuilder->setLockVersion(0);
+        $tokenValueBuilder = new TokenValueBuilder();
+        $tokenValueBuilder->setToken($preregistrationValue->getToken());
+        $tokenValueBuilder->setExpiredOn($preregistrationValue->getExpiredOn());
 
-        return $preregistrationBuilder->build();
+        $preregistrationEntityBuilder->setTokenValue($tokenValueBuilder->build());
+
+        $emailValue = new EmailValue($preregistrationValue->getEmail());
+
+        $preregistrationEntityBuilder->setEmailValue($emailValue);
+        $preregistrationEntityBuilder->setLockVersion(0);
+
+        return $preregistrationEntityBuilder->build();
     }
 
     /**

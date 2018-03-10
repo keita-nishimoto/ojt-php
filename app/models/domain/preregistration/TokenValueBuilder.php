@@ -1,18 +1,18 @@
 <?php
 /**
- * PreregistrationValueBuilder
- * 仮ユーザー登録時のParameterを格納する値オブジェクト
+ * TokenValueBuilder
  */
 
-namespace App\Models\Domain;
+namespace App\Models\Domain\Preregistration;
 
 /**
- * Class PreregistrationValueBuilder
+ * Class TokenValueBuilder
  *
- * @package App\Models\Domain
+ * @package App\Models\Domain\Preregistration
  */
-class PreregistrationValueBuilder
+class TokenValueBuilder
 {
+
     /**
      * トークン
      *
@@ -26,13 +26,6 @@ class PreregistrationValueBuilder
      * @var \DateTime
      */
     private $expiredOn;
-
-    /**
-     * メールアドレス
-     *
-     * @var string
-     */
-    private $email;
 
     /**
      * @return string
@@ -67,26 +60,10 @@ class PreregistrationValueBuilder
     }
 
     /**
-     * @return string
+     * @return TokenValue
      */
-    public function getEmail(): string
+    public function build()
     {
-        return $this->email;
-    }
-
-    /**
-     * @param string $email
-     */
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
-    }
-
-    /**
-     * @return PreregistrationValue
-     */
-    public function build(): PreregistrationValue
-    {
-        return new PreregistrationValue($this);
+        return new TokenValue($this);
     }
 }

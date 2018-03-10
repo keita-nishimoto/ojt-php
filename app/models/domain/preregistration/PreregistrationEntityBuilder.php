@@ -1,16 +1,16 @@
 <?php
 /**
- * PreregistrationBuilder
+ * PreregistrationEntityBuilder
  */
 
-namespace App\Models\Domain;
+namespace App\Models\Domain\Preregistration;
 
 /**
- * Class PreregistrationBuilder
+ * Class PreregistrationEntityBuilder
  *
  * @package App\Models\Domain
  */
-class PreregistrationBuilder
+class PreregistrationEntityBuilder
 {
     /**
      * 識別子
@@ -27,25 +27,14 @@ class PreregistrationBuilder
     private $isRegistered;
 
     /**
-     * トークン
-     *
-     * @var string
+     * @var TokenValue
      */
-    private $token;
+    private $tokenValue;
 
     /**
-     * 有効期限切れになる日時
-     *
-     * @var \DateTime
+     * @var EmailValue
      */
-    private $expiredOn;
-
-    /**
-     * メールアドレス
-     *
-     * @var string
-     */
-    private $email;
+    private $emailValue;
 
     /**
      * バージョン
@@ -87,51 +76,35 @@ class PreregistrationBuilder
     }
 
     /**
-     * @return string
+     * @return TokenValue
      */
-    public function getToken(): string
+    public function getTokenValue(): TokenValue
     {
-        return $this->token;
+        return $this->tokenValue;
     }
 
     /**
-     * @param string $token
+     * @param TokenValue $tokenValue
      */
-    public function setToken(string $token): void
+    public function setTokenValue(TokenValue $tokenValue): void
     {
-        $this->token = $token;
+        $this->tokenValue = $tokenValue;
     }
 
     /**
-     * @return \DateTime
+     * @return EmailValue
      */
-    public function getExpiredOn(): \DateTime
+    public function getEmailValue(): EmailValue
     {
-        return $this->expiredOn;
+        return $this->emailValue;
     }
 
     /**
-     * @param \DateTime $expiredOn
+     * @param EmailValue $emailValue
      */
-    public function setExpiredOn(\DateTime $expiredOn): void
+    public function setEmailValue(EmailValue $emailValue): void
     {
-        $this->expiredOn = $expiredOn;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param string $email
-     */
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
+        $this->emailValue = $emailValue;
     }
 
     /**
@@ -151,10 +124,10 @@ class PreregistrationBuilder
     }
 
     /**
-     * @return Preregistration
+     * @return PreregistrationEntity
      */
-    public function build(): Preregistration
+    public function build(): PreregistrationEntity
     {
-        return new Preregistration($this);
+        return new PreregistrationEntity($this);
     }
 }

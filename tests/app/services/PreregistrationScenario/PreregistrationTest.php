@@ -42,32 +42,32 @@ class PreregistrationTest extends DbTestCase
         $expectedExpiredOn = new \DateTime();
         $expectedExpiredOn->add(new \DateInterval('P1D'));
 
-        $preregistration = $preregistrationScenario->preregistration(
+        $preregistrationEntity = $preregistrationScenario->preregistration(
             ['email' => $email]
         );
 
         // 意図した通りのドメインオブジェクトが返却される事を確認する
-        $this->assertInstanceOf('\\App\\Models\\Domain\\Preregistration', $preregistration);
+        $this->assertInstanceOf('\\App\\Models\\Domain\\Preregistration\\PreregistrationEntity', $preregistrationEntity);
 
         // 各属性が意図した値かどうかを確認
         $this->assertSame(
             2,
-            $preregistration->getId()
+            $preregistrationEntity->getId()
         );
 
         $this->assertSame(
             false,
-            $preregistration->isRegistered()
+            $preregistrationEntity->isRegistered()
         );
 
         $this->assertSame(
             $expectedExpiredOn->format('Y-m-d'),
-            $preregistration->getExpiredOn()->format('Y-m-d')
+            $preregistrationEntity->getTokenValue()->getExpiredOn()->format('Y-m-d')
         );
 
         $this->assertSame(
             $email,
-            $preregistration->getEmail()
+            $preregistrationEntity->getEmailValue()->getEmail()
         );
 
         // 仮ユーザー登録のテーブルが意図した通りに変わっているか確認する
@@ -121,7 +121,7 @@ class PreregistrationTest extends DbTestCase
         $expectedPreregistrationsTokens = [
             'id'           => '2',
             'register_id'  => '2',
-            'token'        => $preregistration->getToken(),
+            'token'        => $preregistrationEntity->getTokenValue()->getToken(),
             'lock_version' => '0',
             'created_at'   => $nowDate->format('Y-m-d'),
             'updated_at'   => $nowDate->format('Y-m-d'),

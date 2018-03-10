@@ -1,17 +1,17 @@
 <?php
 /**
- * Preregistration
+ * PreregistrationEntity
  * 仮ユーザー登録のEntity
  */
 
-namespace App\Models\Domain;
+namespace App\Models\Domain\Preregistration;
 
 /**
- * Class Preregistration
+ * Class PreregistrationEntity
  *
  * @package App\Models\Domain
  */
-class Preregistration
+class PreregistrationEntity
 {
     /**
      * 識別子
@@ -28,25 +28,14 @@ class Preregistration
     private $isRegistered;
 
     /**
-     * トークン
-     *
-     * @var string
+     * @var TokenValue
      */
-    private $token;
+    private $tokenValue;
 
     /**
-     * 有効期限切れになる日時
-     *
-     * @var \DateTime
+     * @var EmailValue
      */
-    private $expiredOn;
-
-    /**
-     * メールアドレス
-     *
-     * @var string
-     */
-    private $email;
+    private $emailValue;
 
     /**
      * バージョン
@@ -58,15 +47,14 @@ class Preregistration
     /**
      * Preregistration constructor.
      *
-     * @param PreregistrationBuilder $builder
+     * @param PreregistrationEntityBuilder $builder
      */
-    public function __construct(PreregistrationBuilder $builder)
+    public function __construct(PreregistrationEntityBuilder $builder)
     {
         $this->id = $builder->getId();
         $this->isRegistered = $builder->isRegistered();
-        $this->token = $builder->getToken();
-        $this->expiredOn = $builder->getExpiredOn();
-        $this->email = $builder->getEmail();
+        $this->tokenValue = $builder->getTokenValue();
+        $this->emailValue = $builder->getEmailValue();
         $this->lockVersion = $builder->getLockVersion();
     }
 
@@ -87,27 +75,19 @@ class Preregistration
     }
 
     /**
-     * @return string
+     * @return TokenValue
      */
-    public function getToken(): string
+    public function getTokenValue(): TokenValue
     {
-        return $this->token;
+        return $this->tokenValue;
     }
 
     /**
-     * @return \DateTime
+     * @return EmailValue
      */
-    public function getExpiredOn(): \DateTime
+    public function getEmailValue(): EmailValue
     {
-        return $this->expiredOn;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmail(): string
-    {
-        return $this->email;
+        return $this->emailValue;
     }
 
     /**

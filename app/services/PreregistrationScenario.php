@@ -6,8 +6,8 @@
 
 namespace App\Services;
 
-use App\Models\Domain\Preregistration;
-use App\Models\Domain\PreregistrationValueBuilder;
+use App\Models\Domain\Preregistration\PreregistrationEntity;
+use App\Models\Domain\Preregistration\PreregistrationValueBuilder;
 use App\Models\Repository\PreregistrationRepository;
 use Ramsey\Uuid\Uuid;
 
@@ -43,10 +43,10 @@ class PreregistrationScenario
      * 仮ユーザー登録を行う
      *
      * @param array $params
-     * @return Preregistration
+     * @return PreregistrationEntity
      * @throws \Exception
      */
-    public function preregistration(array $params): Preregistration
+    public function preregistration(array $params): PreregistrationEntity
     {
         try {
             $this->pdo->beginTransaction();
@@ -61,11 +61,11 @@ class PreregistrationScenario
             $builder->setEmail($params['email']);
 
             $preregistrationValue = $builder->build();
-            $preregistration = $this->preregistrationRepository->createToken($preregistrationValue);
+            $preregistrationEntity = $this->preregistrationRepository->createToken($preregistrationValue);
 
             $this->pdo->commit();
 
-            return $preregistration;
+            return $preregistrationEntity;
         } catch (\PDOException $e) {
             if ($this->pdo->inTransaction()) {
                 $this->pdo->rollBack();
