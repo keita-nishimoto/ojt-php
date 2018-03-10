@@ -12,12 +12,6 @@ namespace App\Models\Domain\Preregistration;
  */
 class TokenEntity
 {
-    /**
-     * 識別子
-     *
-     * @var int
-     */
-    private $id;
 
     /**
      * トークン
@@ -40,17 +34,8 @@ class TokenEntity
      */
     public function __construct(TokenEntityBuilder $builder)
     {
-        $this->id = $builder->getId();
         $this->token = $builder->getToken();
         $this->expiredOn = $builder->getExpiredOn();
-    }
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
     }
 
     /**
