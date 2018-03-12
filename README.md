@@ -57,24 +57,32 @@ Qiitaに [PHPでデータベースに接続するときのまとめ](https://qii
 
 ファイルの内容は以下の内容を入れて下さい。
 
+※ [SendGrid](https://sendgrid.kke.co.jp/) の契約はフリープランで十分です。
+
 ```
+APP_URL=アプリケーションのURL
 DB_NAME=あなたが決めたデータベース名
 DB_USER=あなたが決めたMySQLのユーザー名
 DB_PASSWORD=あなたが決めたMySQLのユーザーのパスワード
 TEST_DB_NAME=あなたが決めたテスト用データベース名
 TEST_DB_USER=あなたが決めたテスト用MySQLユーザー名
 TEST_DB_PASSWORD=あなたが決めたテスト用MySQLユーザーパスワード
+SENDGRID_API_KEY=SendGridで発行したAPIキー
+ADMIN_EMAIL=受信可能なあなたのメールアドレス
 ```
 
 例としては以下のような形になります。
 
 ```
+APP_URL=http://192.168.33.100:8080
 DB_NAME=ojt_php
 DB_USER=ojt_php
 DB_PASSWORD=ZVgvWcO_Zndw3hcC
 TEST_DB_NAME=ojt_php_test
 TEST_DB_USER=ojt_php_test
 TEST_DB_PASSWORD=(YourPassword999)
+SENDGRID_API_KEY=YOUR_API_KEY
+ADMIN_EMAIL=keita.koga@example.com
 ```
 
 `.env` というファイルはセキュリティ的にgitRepositoryで管理するのが良くないとされている情報を入れておく為の物です。
