@@ -3,14 +3,14 @@
  * Logger
  */
 
-namespace App\lib;
+namespace App\Lib;
 
 use Monolog\Handler\StreamHandler;
 
 /**
  * Class Logger
  *
- * @package App\lib
+ * @package App\Lib
  */
 class Logger
 {
@@ -44,6 +44,6 @@ class Logger
             'debugValue' => $var,
         ];
 
-        $this->logger->debug('App\lib\Logger:debug', $context);
+        $this->logger->debug('App\Lib\Logger:debug', $context);
     }
 }

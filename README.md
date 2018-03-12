@@ -162,14 +162,14 @@ PHPDocを書きましょう。
  * Logger
  */
 
-namespace App\lib;
+namespace App\Lib;
 
 use Monolog\Handler\StreamHandler;
 
 /**
  * Class Logger
  *
- * @package App\lib
+ * @package App\Lib
  */
 ```
 
