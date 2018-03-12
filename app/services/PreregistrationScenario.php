@@ -6,6 +6,8 @@
 
 namespace App\Services;
 
+use App\Exceptions\ValidationException;
+use App\Models\Domain\EmailService;
 use App\Models\Domain\Preregistration\PreregistrationEntity;
 use App\Models\Domain\Preregistration\PreregistrationValueBuilder;
 use App\Models\Repository\PreregistrationRepository;
@@ -49,6 +51,8 @@ class PreregistrationScenario
     public function preregistration(array $params): PreregistrationEntity
     {
         try {
+            $this->validation($params);
+
             $this->pdo->beginTransaction();
 
             $uuid4 = Uuid::uuid4();
@@ -73,5 +77,44 @@ class PreregistrationScenario
 
             throw $e;
         }
+    }
+
+    /**
+     * バリデーションを行う
+     *
+     * @param array $params
+     * @throws ValidationException
+     */
+    private function validation(array $params)
+    {
+        $errors = [];
+
+        $emailValidateResult = $this->validateEmail($params);
+        if ($emailValidateResult !== '') {
+            $errors['email'] = $emailValidateResult;
+        }
+
+        if (empty($errors) === false) {
+            throw new ValidationException($errors);
+        }
+    }
+
+    /**
+     * メールアドレスのバリデーションを行う
+     *
+     * @param array $params
+     * @return string
+     */
+    private function validateEmail(array $params): string
+    {
+        if (array_key_exists('email', $params) !== true) {
+            return EmailService::EMAIL_REQUIRED_MESSAGE;
+        }
+
+        if (EmailService::isEmail($params['email']) === false) {
+            return EmailService::EMAIL_VALIDATION_ERROR_MESSAGE;
+        }
+
+        return '';
     }
 }

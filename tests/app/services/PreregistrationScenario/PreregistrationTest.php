@@ -185,4 +185,41 @@ class PreregistrationTest extends DbTestCase
 
         $this->assertSame($expectedPreregistrationsEmails, $actualPreregistrationsEmails);
     }
+
+
+
+    /**
+     * @param $value
+     * @throws \Exception
+     * @dataProvider emailProvider
+     * @expectedException \App\Exceptions\ValidationException
+     * @expectedExceptionCode 422
+     * @expectedExceptionMessage Unprocessable Entity
+     */
+    public function testFailValidationError($value)
+    {
+        $pdo = $this->getPdo();
+
+        $preregistrationScenario = new PreregistrationScenario($pdo);
+
+        $preregistrationScenario->preregistration(
+            ['email' => $value]
+        );
+    }
+
+    /**
+     * データプロバイダ
+     *
+     * @return array
+     * @see https://phpunit.readthedocs.io/ja/latest/writing-tests-for-phpunit.html#writing-tests-for-phpunit-data-providers
+     */
+    public function emailProvider()
+    {
+        return [
+            'emptyString' => [''],
+            'null'        => [null],
+            'emptyArray'  => [[]],
+            'notRFCEmail' => ['.k.k.k@docomo.ne.jp'],
+        ];
+    }
 }
