@@ -7,6 +7,7 @@ namespace App\Controllers;
 
 use \Psr\Http\Message\ResponseInterface as Response;
 use \Psr\Http\Message\ServerRequestInterface as Request;
+use App\Exceptions\ValidationException;
 
 /**
  * Class PreregistrationController
@@ -39,6 +40,38 @@ class PreregistrationController extends Controller
         $response->getBody()->write($this->getTemplate()->render('preregistration/form.html', $renderParams));
 
         return $response;
+    }
+
+    /**
+     * 仮ユーザー登録フォームにPOSTリクエストが送信されてきた時
+     * 状況に応じて仮ユーザー登録の完了メッセージ、またはエラーメッセージを表示させる
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param array $pathParams
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function postToForm(
+        Request $request,
+        Response $response,
+        array $pathParams = []
+    ): Response {
+        try {
+            $renderParams = [
+                'title' => 'PHP OJT 仮ユーザー登録完了',
+            ];
+
+            $response->getBody()->write(
+                $this->getTemplate()->render('preregistration/complete.html', $renderParams)
+            );
+
+            return $response;
+        } catch (ValidationException $e) {
+            // TODO Error処理の実装
+        }
     }
 
     /**

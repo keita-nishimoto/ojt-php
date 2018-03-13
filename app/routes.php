@@ -40,6 +40,13 @@ $app->get('/preregistration', function (Request $request, Response $response, ar
     return $response;
 });
 
+$app->post('/preregistration', function (Request $request, Response $response, array $args) {
+    $preregistrationController = new \App\Controllers\PreregistrationController();
+    $preregistrationController->postToForm($request, $response, $args);
+
+    return $response;
+});
+
 $app->post('/preregistration/complete', function (Request $request, Response $response, array $args) {
     $preregistrationController = new \App\Controllers\PreregistrationController();
     $preregistrationController->showCompleteMessage($request, $response, $args);
