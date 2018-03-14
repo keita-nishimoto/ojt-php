@@ -210,3 +210,9 @@ class UserFactory
 `app/views/ErrorView.php` 等に記載されているので書き方は直接ファイルを参照して下さい。
 
 [公式ドキュメント](https://docs.phpdoc.org/getting-started/your-first-set-of-documentation.html) にも軽く目を通しておいて下さい。
+
+PHPDocに関してはPSR-5で標準仕様の策定が進められています。
+
+詳しくは [2018年のPHPDoc事情とPSR-5](https://qiita.com/tadsan/items/72b02339d12120ca37d7) という記事を参考にして下さい。
+
+このプロジェクト内では [公式ドキュメント](https://docs.phpdoc.org/getting-started/your-first-set-of-documentation.html) のルールで書いておけば良いです。
