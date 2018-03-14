@@ -268,3 +268,51 @@ $_GET['name'] = 'kkk';
 HTTPのメッセージを扱う際は [PSR-7](https://www.php-fig.org/psr/psr-7/) に準拠したライブラリを利用します。
 
 本プロジェクトでは [Slim Framework](https://www.slimframework.com/) が実装している物を利用しています。
+
+# リクエストからレスポンスまでの流れ
+
+基本的な流れは下記の通りです。
+
+`public/index.php`
+↓
+`app/routes.php`
+↓
+Controllers配下にあるControllerクラス
+↓
+models配下にあるビジネスロジックの呼び出し
+
+最初のうちは処理の流れが理解出来るまでデバッグを行ってみると良いでしょう。
+
+# デバッグ方法について
+
+一番簡単なデバッグ方法に関しては [var_dump()](http://php.net/manual/ja/function.var-dump.php) を利用する事です。
+
+引数に変数名を渡すと中身を表示させてくれます。
+
+使ってみると分かりますが、デバッグの内容が画面上に出力されてしまいます。
+
+よって利用した後は削除するのを忘れないようにしないと重要な情報が流出してしまう危険性があります。（防ぐ為の仕組みは色々あります）
+
+処理完了後にすぐにリダイレクトするケース等で画面に出力出来ないケースもあるでしょう。
+
+そういう場合は `\App\Lib\Logger` を利用します。
+
+```php
+<?php
+use App\Lib\Logger;
+
+$renderParams = [
+    'title' => 'PHP OJT トップ',
+];
+
+$logger = new Logger();
+$logger->debug($renderParams);
+```
+
+`logs/app.log` に変数の中身を含めたデバッグログが出力されます。
+
+上記の例だと下記のように書き込まれます。
+
+```text
+[2018-03-15 00:53:02] ojt-php.DEBUG: App\Lib\Logger:debug {"debugValue":{"title":"PHP OJT トップ"}} []
+```
