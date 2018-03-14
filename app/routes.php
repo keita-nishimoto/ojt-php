@@ -28,20 +28,19 @@ $container['notAllowedHandler'] = function (\Slim\Container $container) {
 $app = new \Slim\App($container);
 $app->get('/', function (Request $request, Response $response, array $args) {
     $indexController = new \App\Controllers\IndexController();
-    $indexController->showIndex($request, $response, $args);
 
-    return $response;
+    return $indexController->showIndex($request, $response, $args);
 });
 
 $app->get('/preregistration', function (Request $request, Response $response, array $args) {
     $preregistrationController = new \App\Controllers\PreregistrationController();
-    $preregistrationController->showForm($request, $response, $args);
 
-    return $response;
+    return $preregistrationController->showForm($request, $response, $args);
 });
 
 $app->post('/preregistration', function (Request $request, Response $response, array $args) {
     $preregistrationController = new \App\Controllers\PreregistrationController();
+
     return $preregistrationController->postToForm($request, $response, $args);
 });
 
@@ -53,44 +52,38 @@ $app->get('/preregistration/complete', function (Request $request, Response $res
 
 $app->get('/registration/{token}', function (Request $request, Response $response, array $args) {
     $registrationController = new \App\Controllers\RegistrationController();
-    $registrationController->showForm($request, $response, $args);
 
-    return $response;
+    return $registrationController->showForm($request, $response, $args);
 });
 
 $app->post('/registration/{token}', function (Request $request, Response $response, array $args) {
     $registrationController = new \App\Controllers\RegistrationController();
-    $registrationController->showForm($request, $response, $args);
 
-    return $response;
+    return $registrationController->showForm($request, $response, $args);
 });
 
 $app->post('/registration/{token}/confirm', function (Request $request, Response $response, array $args) {
     $registrationController = new \App\Controllers\RegistrationController();
-    $registrationController->showConfirmForm($request, $response, $args);
 
-    return $response;
+    return $registrationController->showConfirmForm($request, $response, $args);
 });
 
 $app->post('/registration/{token}/complete', function (Request $request, Response $response, array $args) {
     $registrationController = new \App\Controllers\RegistrationController();
-    $registrationController->showCompleteMessage($request, $response, $args);
 
-    return $response;
+    return $registrationController->showCompleteMessage($request, $response, $args);
 });
 
 $app->get('/login', function (Request $request, Response $response) {
     $loginController = new \App\Controllers\LoginController();
-    $loginController->showForm($request, $response);
 
-    return $response;
+    return $loginController->showForm($request, $response);
 });
 
 $app->get('/users/{userId}', function (Request $request, Response $response, array $args) {
     $userController = new \App\Controllers\UserController();
-    $userController->showUser($request, $response, $args);
 
-    return $response;
+    return $userController->showUser($request, $response, $args);
 });
 
 $app->run();
