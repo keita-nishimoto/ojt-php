@@ -46,6 +46,7 @@ class PreregistrationScenario
      *
      * @param array $params
      * @return PreregistrationEntity
+     * @throws ValidationException
      * @throws \Exception
      */
     public function preregistration(array $params): PreregistrationEntity
@@ -70,6 +71,8 @@ class PreregistrationScenario
             $this->pdo->commit();
 
             return $preregistrationEntity;
+        } catch (ValidationException $e) {
+            throw $e;
         } catch (\PDOException $e) {
             if ($this->pdo->inTransaction()) {
                 $this->pdo->rollBack();

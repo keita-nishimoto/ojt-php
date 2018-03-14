@@ -3,11 +3,19 @@
 {% block content %}
 <h1>{{ title }}</h1>
 
-<form method="post" action="/preregistration/complete">
+<form method="post" action="">
   <div class="form-group">
     <label for="preregistrationInputEmail1"></label>
-    <input type="email" class="form-control" id="preregistrationInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
-    <small id="emailHelp" class="form-text text-muted">メールアドレスを入れて下さい。</small>
+    <input
+      type="email"
+      class="form-control {{ isError ? 'is-invalid' : '' }}"
+      id="preregistrationInputEmail1"
+      name="email" aria-describedby="emailHelp"
+      placeholder="Enter email"
+      value="{{ email ? email : '' }}"
+    >
+    <div class="invalid-feedback">{{ isError ? errorMessage : '' }}</div>
+    <small id="emailHelp" class="form-text text-muted">{{ isError ? '' : 'メールアドレスを入れて下さい。' }}</small>
   </div>
   <button type="submit" class="btn btn-primary">送信する</button>
 </form>
