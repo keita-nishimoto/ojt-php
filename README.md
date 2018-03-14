@@ -110,6 +110,10 @@ PHPの場合は `vlucas/phpdotenv` というパッケージを使って管理を
 
 このような情報に惑わされない為にも [PHP The Right Way](http://ja.phptherightway.com/) を流し読みしておく事をオススメします。
 
+※ 他にも [個人的にPHPで開発する上で頭に入れておきたいと思っている事](https://qiita.com/n_mogi/items/252dc4dcf75f3b2ea977) という記事も人気を集めています。
+
+[PHP The Right Way](http://ja.phptherightway.com/) で書かれている事とも共通点が多いです。
+
 ### packageの追加
 
 以下のコマンドをプロジェクトルートで実行すると `composer.json` や `composer.lock` に自動で書き込んでくれるのでオススメです。
