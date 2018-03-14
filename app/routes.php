@@ -42,16 +42,13 @@ $app->get('/preregistration', function (Request $request, Response $response, ar
 
 $app->post('/preregistration', function (Request $request, Response $response, array $args) {
     $preregistrationController = new \App\Controllers\PreregistrationController();
-    $preregistrationController->postToForm($request, $response, $args);
-
-    return $response;
+    return $preregistrationController->postToForm($request, $response, $args);
 });
 
-$app->post('/preregistration/complete', function (Request $request, Response $response, array $args) {
+$app->get('/preregistration/complete', function (Request $request, Response $response, array $args) {
     $preregistrationController = new \App\Controllers\PreregistrationController();
-    $preregistrationController->showCompleteMessage($request, $response, $args);
 
-    return $response;
+    return $preregistrationController->showCompleteMessage($request, $response, $args);
 });
 
 $app->get('/registration/{token}', function (Request $request, Response $response, array $args) {

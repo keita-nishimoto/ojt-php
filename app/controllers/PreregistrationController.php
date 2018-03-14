@@ -78,15 +78,7 @@ class PreregistrationController extends Controller
             $mailSender = new MailSender();
             $mailSender->send($preregistrationMailValue);
 
-            $renderParams = [
-                'title' => 'PHP OJT 仮ユーザー登録完了',
-            ];
-
-            $response->getBody()->write(
-                $this->getTemplate()->render('preregistration/complete.html', $renderParams)
-            );
-
-            return $response;
+            return $response->withRedirect('http://192.168.33.10:8080/preregistration/complete');
         } catch (ValidationException $e) {
             $renderParams = [
                 'title'        => 'PHP OJT 仮ユーザー登録完了',
