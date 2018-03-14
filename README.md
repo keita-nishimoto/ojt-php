@@ -128,7 +128,7 @@ PHPの場合は `vlucas/phpdotenv` というパッケージを使って管理を
 
 ## テストの実行
 
-PHPのテストは [PHPUnit](https://phpunit.de/manual/current/ja/index.html) が良く利用されています。
+PHPのテストは [PHPUnit](https://phpunit.readthedocs.io/ja/latest/) が良く利用されています。
 
 `composer test` を実行すると `tests` 配下にあるテストクラスが全て実行されます。
 
@@ -139,9 +139,6 @@ PHPのテストは [PHPUnit](https://phpunit.de/manual/current/ja/index.html) �
 さらに特定のメソッドだけをテストしたい場合は下記のように `--filter` オプションを指定して実行します。
 
 `vendor/bin/phpunit tests/app/models/repository/UserRepository/UserRepositoryTest.php --filter testSuccess`
-
-※ vendor/bin/phpunit を直接実行しないと `--filter` オプションを実行出来ませんでした。
-方法が判明次第、本ドキュメントに追記します。
 
 ## テストの実行（コードカバレッジの出力）
 
