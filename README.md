@@ -289,6 +289,8 @@ models配下にあるビジネスロジックの呼び出し
 
 引数に変数名を渡すと中身を表示させてくれます。
 
+初心者向けに [もうエラーでつまずかない！PHP言語でデバッグを行う方法【初心者向け】](https://techacademy.jp/magazine/11647) という記事がありますのでこちらも読んでおくと良いでしょう。
+
 使ってみると分かりますが、デバッグの内容が画面上に出力されてしまいます。
 
 よって利用した後は削除するのを忘れないようにしないと重要な情報が流出してしまう危険性があります。（防ぐ為の仕組みは色々あります）
@@ -316,3 +318,14 @@ $logger->debug($renderParams);
 ```text
 [2018-03-15 00:53:02] ojt-php.DEBUG: App\Lib\Logger:debug {"debugValue":{"title":"PHP OJT トップ"}} []
 ```
+
+Node.jsの時と同じくDebuggerを利用する事が出来ます。
+
+XdebugというDebuggerを使うのが便利ですが、ステップ実行等を行う為にはIDEの力を借りる必要があります。
+
+- [VisualStudioCode + Vagrant + XdebugでPHPをリモートデバッグ](https://qiita.com/ushi_d/items/f4b5af012725728842d7)
+- [PhpStorm で Vagrant 環境のリモートデバッグを実行する](https://luftgarden.work/phpstorm-xdebug-vagrant/)
+- [Atom+Xdebug+Vagrantでデバッグ環境の構築](https://qiita.com/hazcauch/items/d8ad88ba906982ea9589)
+- [PHPSTORMでXdebugを使えるようにしよう！](https://qiita.com/taniai-lvgs/items/8e9eba112d2d0ed2530f)
+
+[phpdbg](http://php.net/manual/ja/migration56.new-features.php#migration56.new-features.phpdbg) という標準のDebuggerが一応存在しますが、個人的にはまだXdebugのほうが扱いやすい印象があります。
