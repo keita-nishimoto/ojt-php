@@ -220,3 +220,13 @@ PHPDocに関してはPSR-5で標準仕様の策定が進められています。
 詳しくは [2018年のPHPDoc事情とPSR-5](https://qiita.com/tadsan/items/72b02339d12120ca37d7) という記事を参考にして下さい。
 
 このプロジェクト内では [公式ドキュメント](https://docs.phpdoc.org/getting-started/your-first-set-of-documentation.html) のルールで書いておけば良いです。
+
+## PSRについて
+
+[web-developer-ojt PHP](https://github.com/keitakn/web-developer-ojt/tree/master/docs/server-side-programming/PHP) にも書きましたが、PHPにはPHPフレームワークを開発している団体が定めている標準規約があります。
+
+それがPSRです。
+
+後のセクションで一部は説明しますが、基本的にライブラリやフレームワークを選ぶ際はこのPSRに準拠している物を選ぶと良いでしょう。
+
+基本的な骨組みは一緒なので例え他のフレームワークやライブラリを利用する事になってもPSRに準拠していれば学習コストの面で有利です。
