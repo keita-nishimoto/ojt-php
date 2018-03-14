@@ -8,6 +8,10 @@ namespace App\Controllers;
 use \Psr\Http\Message\ResponseInterface as Response;
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use App\Exceptions\ValidationException;
+use App\Factory\PdoFactory;
+use App\Lib\MailSender;
+use App\Models\Domain\Preregistration\PreregistrationMailValue;
+use App\Services\PreregistrationScenario;
 
 /**
  * Class PreregistrationController
@@ -50,6 +54,7 @@ class PreregistrationController extends Controller
      * @param Response $response
      * @param array $pathParams
      * @return Response
+     * @throws \Exception
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
@@ -60,6 +65,19 @@ class PreregistrationController extends Controller
         array $pathParams = []
     ): Response {
         try {
+            $request->getParsedBody();
+
+            $preregistrationScenario = new PreregistrationScenario(
+                PdoFactory::create()
+            );
+
+            $preregistrationEntity = $preregistrationScenario->preregistration($request->getParsedBody());
+
+            $preregistrationMailValue = new PreregistrationMailValue($preregistrationEntity);
+
+            $mailSender = new MailSender();
+            $mailSender->send($preregistrationMailValue);
+
             $renderParams = [
                 'title' => 'PHP OJT 仮ユーザー登録完了',
             ];
@@ -70,7 +88,20 @@ class PreregistrationController extends Controller
 
             return $response;
         } catch (ValidationException $e) {
-            // TODO Error処理の実装
+            $renderParams = [
+                'title'        => 'PHP OJT 仮ユーザー登録完了',
+                'email'        => $request->getParsedBody()['email'],
+                'isError'      => true,
+                'errorMessage' => $e->getErrors()['email'],
+            ];
+
+            $response
+                ->getBody()
+                ->write(
+                    $this->getTemplate()->render('preregistration/form.html', $renderParams)
+                );
+
+            return $response;
         }
     }
 
