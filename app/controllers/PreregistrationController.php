@@ -78,7 +78,9 @@ class PreregistrationController extends Controller
             $mailSender = new MailSender();
             $mailSender->send($preregistrationMailValue);
 
-            return $response->withRedirect('http://192.168.33.10:8080/preregistration/complete');
+            $completeUrl = getenv('APP_URL') . '/preregistration/complete';
+
+            return $response->withRedirect($completeUrl);
         } catch (ValidationException $e) {
             $renderParams = [
                 'title'        => 'PHP OJT 仮ユーザー登録完了',
