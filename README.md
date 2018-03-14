@@ -329,3 +329,30 @@ XdebugというDebuggerを使うのが便利ですが、ステップ実行等を
 - [PHPSTORMでXdebugを使えるようにしよう！](https://qiita.com/taniai-lvgs/items/8e9eba112d2d0ed2530f)
 
 [phpdbg](http://php.net/manual/ja/migration56.new-features.php#migration56.new-features.phpdbg) という標準のDebuggerが一応存在しますが、個人的にはまだXdebugのほうが扱いやすい印象があります。
+
+# テンプレートエンジンについて
+
+PHPはそれ自体がテンプレートエンジンとしての機能を持っています。
+
+しかし実戦では他の言語と同じようにテンプレートエンジンを利用するのが一般的です。
+
+本プロジェクトでは [Twig](https://twig.sensiolabs.org/) を利用しています。
+
+- [PHPでWebアプリ開発！人気テンプレートエンジン「Twig」を使ってみよう](https://www.webprofessional.jp/twig-popular-stand-alone-php-template-engine/)
+
+# フレームワークについて
+
+本プロジェクトでは [Slim](https://www.slimframework.com/) というマイクロフレームワーク（最小限の機能だけを備えたフレームワーク）を利用しています。
+
+しかし課題を進めていく際にはなるべくフレームワークの機能に頼らない実装を行い基本的な仕組みを理解するほうが大事だと考え、本プロジェクトではあえてフレームワークの機能を使っていない場所も多いです。
+
+CookieやSession、HTTP等のWebアプリケーションの開発の基礎を身につけるほうがフレームワークを覚えるよりも有効な学習となるので、PHP向けの課題ではそのあたりを意識しています。
+
+[Slim](https://www.slimframework.com/) に関しては非常に分かりやすい記事がQiitaにあるので参考にすると良いでしょう。
+
+- [私家版 Slim Framework チュートリアル (1) 〜 特徴と準備編](https://qiita.com/nunulk/items/4b5c15f13ade660cafbc)
+- [私家版 Slim Framework チュートリアル (2) 〜 ルーティングと新規作成編](https://qiita.com/nunulk/items/8492548678aac697d0aa)
+- [私家版 Slim Framework チュートリアル (3) 〜 表示編](https://qiita.com/nunulk/items/33adfbba55057a7d0c5c)
+- [私家版 Slim Framework チュートリアル (4) 〜 編集と削除、ついでにパーシャルビュー編](https://qiita.com/nunulk/items/fb5ef759c1337e99d878)
+- [私家版 Slim Framework チュートリアル (5) 〜 Controllerクラス編](https://qiita.com/nunulk/items/92d06bada7657ce212e7)
+- [私家版 Slim Framework チュートリアル (6) 〜 テスト編](https://qiita.com/nunulk/items/99c12ac8e7b631bd8ed3)
