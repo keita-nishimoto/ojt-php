@@ -274,11 +274,17 @@ HTTPのメッセージを扱う際は [PSR-7](https://www.php-fig.org/psr/psr-7/
 基本的な流れは下記の通りです。
 
 `public/index.php`
+
 ↓
+
 `app/routes.php`
+
 ↓
+
 Controllers配下にあるControllerクラス
+
 ↓
+
 models配下にあるビジネスロジックの呼び出し
 
 最初のうちは処理の流れが理解出来るまでデバッグを行ってみると良いでしょう。
