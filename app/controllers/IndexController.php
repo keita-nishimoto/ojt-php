@@ -22,22 +22,21 @@ class IndexController extends Controller
      * @param Response $response
      * @param array $pathParams
      * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function showIndex(
         Request $request,
         Response $response,
         array $pathParams = []
     ): Response {
-        try {
-            $renderParams = [
-                'title' => 'PHP OJT トップ',
-            ];
+        $renderParams = [
+            'title' => 'PHP OJT トップ',
+        ];
 
-            $response->getBody()->write($this->getTemplate()->render('index.html', $renderParams));
+        $response->getBody()->write($this->getTemplate()->render('index.html', $renderParams));
 
-            return $response;
-        } catch (\Twig_Error_Loader | \Twig_Error_Syntax | \Twig_Error_Runtime $e) {
-            // TODO 後でエラー処理を追加する
-        }
+        return $response;
     }
 }

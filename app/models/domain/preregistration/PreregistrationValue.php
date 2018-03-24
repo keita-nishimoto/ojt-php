@@ -9,7 +9,7 @@ namespace App\Models\Domain\Preregistration;
 /**
  * Class PreregistrationValue
  *
- * @package App\Models\Domain
+ * @package App\Models\Domain\Preregistration
  */
 class PreregistrationValue
 {
