@@ -16,7 +16,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * Class PreregistrationScenario
  *
- * @package App\Models\Domain
+ * @package App\Services
  */
 class PreregistrationScenario
 {

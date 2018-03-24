@@ -8,7 +8,7 @@ namespace App\Models\Domain\Preregistration;
 /**
  * Class PreregistrationEntityBuilder
  *
- * @package App\Models\Domain
+ * @package App\Models\Domain\Preregistration
  */
 class PreregistrationEntityBuilder
 {
